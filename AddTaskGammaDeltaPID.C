@@ -1,5 +1,9 @@
+#include <iostream>
+#include "AliAnalysisManager.h"
 #include "AliAnalysisTaskGammaDeltaPID.h"
-void AddTaskGammaDeltaPID(Int_t gFilterBit = 768,Double_t fPtMin=0.2,Double_t fPtMax=2.0,Double_t fEtaMin=-0.8, Double_t fEtaMax=0.8,Double_t fChi2max=4.0,Int_t gNclustTPC=70, Int_t fparticle=0,Double_t nSigTPC = 3.0, Double_t nSigTOF = 3.0, Bool_t bSkipPileUp=kFALSE, TString sCentEstimator="V0M", Float_t fVzMin = -10.0, Float_t fVzMax = 10.0, TString sTrigger="kINT7", Int_t vnHarmonic=2, TString sDetForEP="TPC", TString sMCfilePath="alien:///alice/cern.ch/user/m/mhaque/nuanue18/HijingMC_LHC18q_FB768_DeftCut.root", TString sNUAFilePath = "alien:///alice/cern.ch/user/m/mhaque/nuanue18/wgtCharge_NUAFB768NoPUcutRun296244.root", TString sDetWgtsFile = "alien:///alice/cern.ch/user/m/mhaque/nuanue18/wgtCharge_NUAFB768NoPUcutRun296244.root", Bool_t bSkipAnalysis=kFALSE, const char *suffix = "")
+using namespace std;
+
+void AddTaskGammaDeltaPID(Int_t gFilterBit = 768,Double_t fPtMin=0.2,Double_t fPtMax=2.0,Double_t fEtaMin=-0.8, Double_t fEtaMax=0.8,Double_t fChi2max=4.0,Int_t gNclustTPC=70, Int_t fparticle=0,Double_t nSigTPC = 3.0, Double_t nSigTOF = 3.0, Bool_t bSkipPileUp=kFALSE, TString sCentEstimator="V0M", Float_t fVzMin = -10.0, Float_t fVzMax = 10.0, TString sTrigger="kINT7", Int_t vnHarmonic=2, TString sDetForEP="TPC", TString sMCfilePath="HijingMC_LHC18q_FB768_DeftCut.root", TString sNUAFilePath = "wgtCharge_NUAFB768NoPUcutRun296244.root", TString sDetWgtsFile = "wgtCharge_NUAFB768NoPUcutRun296244.root", Bool_t bSkipAnalysis=kFALSE, const char *suffix = "")
 {
 
   printf("===================================================================================\n");
