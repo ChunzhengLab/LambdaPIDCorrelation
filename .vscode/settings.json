@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "AddTaskZDCCalibration.C": "cpp",
+    "DrawResults.C": "cpp",
+    "runAnalysis.C": "cpp",
+    "AddTaskGammaDeltaPID.C": "cpp"
+  }
+}
