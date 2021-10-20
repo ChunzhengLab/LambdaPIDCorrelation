@@ -192,7 +192,16 @@ class AliAnalysisTaskGammaDeltaPID : public AliAnalysisTaskSE {
   Double_t           fDaughtersEtaMax; //!
   Double_t       fDaughtersTPCNclsMin; //!
   Double_t  fDaughtersDCAToPrimVtxMin; //!
+  Float_t       fV0PosProtonTPCNsigma; //!
+  Float_t         fV0NegPionTPCNsigma; //!
+  Float_t       fV0NegProtonTPCNsigma; //!
+  Float_t         fV0PosPionTPCNsigma; //!
+  Float_t       fV0PosProtonTOFNsigma; //!
+  Float_t         fV0NegPionTOFNsigma; //!
+  Float_t       fV0NegProtonTOFNsigma; //!
+  Float_t         fV0PosPionTOFNsigma; //!
   //Lambda Mass
+  Bool_t            fV0DaughterUseTOF; //!
   Double_t                  fMassMean; //!
   Double_t             fLambdaMassCut; //!
 
@@ -340,7 +349,15 @@ class AliAnalysisTaskGammaDeltaPID : public AliAnalysisTaskSE {
   TH1D           *fHistV0DecayLength;     //! Raw V0s' DecayLength
 
   ///Lambda-X correlators: Naming Style for Histograms ->
-  /// Lambda = L-capital, Proton = P-capital, Anti= A-capital.  
+  /// Lambda = L-capital, Proton = P-capital, Anti= A-capital.
+  TProfile       *fProfileDelta_Lambda_hPos; //!
+  TProfile       *fProfileDelta_Lambda_hNeg; //!
+  TProfile       *fProfileDelta_Lambda_Proton;     //!
+  TProfile       *fProfileDelta_Lambda_AntiProton; //!
+  TProfile       *fProfileDelta_AntiLambda_hPos; //!
+  TProfile       *fProfileDelta_AntiLambda_hNeg; //!
+  TProfile       *fProfileDelta_AntiLambda_Proton;     //!
+  TProfile       *fProfileDelta_AntiLambda_AntiProton; //!
   TProfile       *fProfileGammaTPC_Lambda_hPos; //!
   TProfile       *fProfileGammaTPC_Lambda_hNeg; //!
   TProfile       *fProfileGammaTPC_Lambda_Proton;     //!
@@ -397,6 +414,7 @@ class AliAnalysisTaskGammaDeltaPID : public AliAnalysisTaskSE {
   Double_t GetNUAWeightForTrack(Double_t fVtxZ=0,Double_t fPhi=0,Double_t fEta=0,Int_t gChrg=1);
   Double_t GetNUAWeightForTrackPID(Double_t fVtxZ=0,Double_t fPhi=0,Double_t fEta=0,Int_t gChrg=1);
   Double_t GetMCEfficiencyWeightForTrack(Double_t fPt=1.0,Int_t gChrg=1,Int_t kPID=0);
+  Int_t    GetLambdaCode(const AliAODTrack *pTrack, const AliAODTrack *ntrack); 
 
 
 
