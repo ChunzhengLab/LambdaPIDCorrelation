@@ -21,7 +21,7 @@ void runAnalysis()
   // set if you want to run the analysis locally (kTRUE), or on grid (kFALSE)
   Bool_t local = kTRUE;
   // if you run on grid, specify test mode (kTRUE) or full grid model (kFALSE)
-  Bool_t gridTest = kTRUE;
+  Bool_t gridTest = kFALSE;
 
   // since we will compile a class, tell root where to look for headers
 #if !defined(__CINT__) || defined(__CLING__)
@@ -32,28 +32,28 @@ void runAnalysis()
   gROOT->ProcessLine(".include $ALICE_ROOT/include");
 #endif
 
+
   // create the analysis manager
   AliAnalysisManager *mgr = new AliAnalysisManager("AnalysisTaskExample");
   AliAODInputHandler *aodH = new AliAODInputHandler();
   mgr->SetInputEventHandler(aodH);
 
-  // load the macro and add the task
   TMacro PIDadd(gSystem->ExpandPathName("$ALICE_ROOT/ANALYSIS/macros/AddTaskPIDResponse.C"));
-  AliAnalysisTaskPIDResponse *PIDresponseTask = reinterpret_cast<AliAnalysisTaskPIDResponse *>(PIDadd.Exec());
+  AliAnalysisTaskPIDResponse* PIDresponseTask = reinterpret_cast<AliAnalysisTaskPIDResponse*>(PIDadd.Exec());
 
   TMacro multSelection(gSystem->ExpandPathName("$ALICE_PHYSICS/OADB/COMMON/MULTIPLICITY/macros/AddTaskMultSelection.C"));
-  AliMultSelectionTask *multSelectionTask = reinterpret_cast<AliMultSelectionTask *>(multSelection.Exec());
+  AliMultSelectionTask* multSelectionTask = reinterpret_cast<AliMultSelectionTask*>(multSelection.Exec());
 
   // compile the class and load the add task macro
   // here we have to differentiate between using the just-in-time compiler
   // from root6, or the interpreter of root5
 #if !defined(__CINT__) || defined(__CLING__)
   gInterpreter->LoadMacro("AliAnalysisTaskGammaDeltaPID.cxx++g");
-  AliAnalysisTaskGammaDeltaPID *task = reinterpret_cast<AliAnalysisTaskGammaDeltaPID *>(gInterpreter->ExecuteMacro("AddGammaDeltaPID.C"));
+  AliAnalysisTaskGammaDeltaPID *task = reinterpret_cast<AliAnalysisTaskGammaDeltaPID *>(gInterpreter->ExecuteMacro("AddTaskLambdaPIDCorr.C"));
 #else
   gROOT->LoadMacro("AliAnalysisTaskGammaDeltaPID.cxx++g");
-  gROOT->LoadMacro("AddGammaDeltaPID.C");
-  AliAnalysisTaskGammaDeltaPID *task = AddGammaDeltaPID();
+  gROOT->LoadMacro("AddTaskLambdaPIDCorr.C");
+  AliAnalysisTaskGammaDeltaPID *task = AddTaskLambdaPIDCorr();
 #endif
 
   if (!mgr->InitAnalysis())
@@ -86,12 +86,12 @@ void runAnalysis()
     // set the Alien API version
     alienHandler->SetAPIVersion("V1.1x");
     // select the input data
-    alienHandler->SetGridDataDir("/alice/data/2015/LHC15o");
-    alienHandler->SetDataPattern("*pass1/AOD194/*AOD.root");
+    alienHandler->SetGridDataDir("/alice/data/2018/LHC18q/");
+    alienHandler->SetDataPattern("*pass3/AOD252/AOD/*AOD.root");
     // MC has no prefix, data has prefix 000
     alienHandler->SetRunPrefix("000");
     // runnumber
-    alienHandler->AddRunNumber(246994);
+    alienHandler->AddRunNumber(296424);
     // number of files per subjob
     alienHandler->SetSplitMaxInputFileNumber(40);
     alienHandler->SetExecutable("myTask.sh");

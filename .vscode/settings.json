@@ -3,6 +3,10 @@
     "AddTaskZDCCalibration.C": "cpp",
     "DrawResults.C": "cpp",
     "runAnalysis.C": "cpp",
-    "AddTaskGammaDeltaPID.C": "cpp"
+    "AddTaskGammaDeltaPID.C": "cpp",
+    "AddTaskLamdaPIDCorr.C": "cpp",
+    "iostream": "cpp",
+    "ostream": "cpp",
+    "iterator": "cpp"
   }
 }
