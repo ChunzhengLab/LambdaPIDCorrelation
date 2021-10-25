@@ -106,6 +106,7 @@ class AliAnalysisTaskGammaDeltaPID : public AliAnalysisTaskSE {
   void SetV0DCAToPrimVtxMax(Double_t v0DCAToPrimVtxMax)                {this->fV0DCAToPrimVtxMax               = v0DCAToPrimVtxMax;}
   void SetV0DcaBetweenDaughtersMax(Double_t v0DcaBetweenDaughtersMax)  {this->fV0DcaBetweenDaughtersMax = v0DcaBetweenDaughtersMax;}
   //V0 Daughter Cut
+  void SetDaughtersPIDUseTOF(Bool_t daughterPIDUseTOF)                 {this->fV0DaughterUseTOF                = daughterPIDUseTOF;}
   void SetDaughtersPtMax(Double_t daughtersPtMax)                      {this->fDaughtersPtMax                     = daughtersPtMax;}
   void SetDaughtersEtaMax(Double_t daughtersEtaMax)                    {this->fDaughtersEtaMax                   = daughtersEtaMax;}
   void SetDaughtersNsigma(Double_t daughtersNsigma)                    {this->fDaughtersNsigma                   = daughtersNsigma;}
