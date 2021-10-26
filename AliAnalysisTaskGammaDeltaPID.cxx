@@ -255,7 +255,7 @@ AliAnalysisTaskGammaDeltaPID::AliAnalysisTaskGammaDeltaPID(const char *name):
   fHistV0Eta(NULL),              
   fHistV0DcatoPrimVertex(NULL), 
   fHistV0CPA(NULL),             
-  fHistV0DecayLength(NULL), 
+  fHistV0DecayLength(NULL),     
   fProfileDelta_Lambda_hPos(NULL),
   fProfileDelta_Lambda_hNeg(NULL),
   fProfileDelta_Lambda_Proton(NULL),   
@@ -493,7 +493,7 @@ AliAnalysisTaskGammaDeltaPID::AliAnalysisTaskGammaDeltaPID():
   fHistV0Eta(NULL),              
   fHistV0DcatoPrimVertex(NULL), 
   fHistV0CPA(NULL),             
-  fHistV0DecayLength(NULL),
+  fHistV0DecayLength(NULL),     
   fProfileDelta_Lambda_hPos(NULL),
   fProfileDelta_Lambda_hNeg(NULL),
   fProfileDelta_Lambda_Proton(NULL),   
@@ -1999,8 +1999,8 @@ Bool_t AliAnalysisTaskGammaDeltaPID::IsGoodV0(AliAODv0 *aodV0)
 Bool_t AliAnalysisTaskGammaDeltaPID::IsGoodDaughterTrack(const AliAODTrack *track)
 {
   // TPC refit
-  if ( !track->IsOn(AliAODTrack::kTPCrefit) ) return kFALSE;
-  //no kinks
+  if (!track->IsOn(AliAODTrack::kTPCrefit)) return kFALSE;
+  //No kinks
   if(Int_t(track->GetProdVertex()->GetType()) == AliAODVertex::kKink) return kFALSE;
   // Maximum value of transverse momentum 
   double dPt = track->Pt();

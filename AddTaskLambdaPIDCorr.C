@@ -1,4 +1,4 @@
-void AddTaskLambdaPIDCorr(Int_t gFilterBit = 768,Double_t fV0PtMin=0.2,Double_t fDautPtMax=2.0,Double_t fDautEtaMin=-0.8, Double_t fDautEtaMax=0.8,Double_t fChi2max=4.0,Int_t gNclustTPC=70,Double_t nSigTPC = 3.0, Double_t nSigTOF = 3.0, Bool_t bSkipPileUp=kFALSE, TString sCentEstimator="V0M", Float_t fVzMin = -10.0, Float_t fVzMax = 10.0, TString sTrigger="kINT7", Int_t vnHarmonic=2, TString sDetForEP="TPC", TString sMCfilePath="alien:///alice/cern.ch/user/m/mhaque/calib2021/efficiencyBothpol18qnew.root", TString sNUAFilePath = "alien:///alice/cern.ch/user/m/mhaque/calib2021/WgtsNUAChargeAndPion_LHC18qPass3_FB768_AlexPU_DeftMode_Sept2021NoAvgQ.root", TString sDetWgtsFile = "alien:///alice/cern.ch/user/m/mhaque/calib2021/CalibV0GainCorrectionLHC18q_Sept2021NoAvgQ.root",Bool_t bSkipAnalysis=kFALSE,Double_t fV0MassMean = 1.115683, Double_t fV0MassCut = 0.005, Double_t fV0CosPAmin = 0.995, Double_t fV0RapidityMax=0.5, Double_t fV0DecLengthMin=3.0, Double_t fV0DecLengthMax=100, Double_t fV0DCAToPrimVtx=1.5, Double_t fV0DCADiffDautMax=1.0, Double_t fV0DautDCAToPrimVtxMin = 0.02, const char *suffix = "")
+void AddTaskLambdaPIDCorr(Int_t gFilterBit = 768,Double_t fV0PtMin=0.2,Bool_t bDaughterUseTOF = kFALSE,Double_t fDautPtMax=2.0,Double_t fDautEtaMin=-0.8, Double_t fDautEtaMax=0.8,Double_t fChi2max=4.0,Int_t gNclustTPC=70,Double_t nSigTPC = 3.0, Double_t nSigTOF = 3.0, Bool_t bSkipPileUp=kFALSE, TString sCentEstimator="V0M", Float_t fVzMin = -10.0, Float_t fVzMax = 10.0, TString sTrigger="kINT7", Int_t vnHarmonic=2, TString sDetForEP="TPC", TString sMCfilePath="alien:///alice/cern.ch/user/m/mhaque/calib2021/efficiencyBothpol18qnew.root", TString sNUAFilePath = "alien:///alice/cern.ch/user/m/mhaque/calib2021/WgtsNUAChargeAndPion_LHC18qPass3_FB768_AlexPU_DeftMode_Sept2021NoAvgQ.root", TString sDetWgtsFile = "alien:///alice/cern.ch/user/m/mhaque/calib2021/CalibV0GainCorrectionLHC18q_Sept2021NoAvgQ.root",Bool_t bSkipAnalysis=kFALSE,Double_t fV0MassMean = 1.115683, Double_t fV0MassCut = 0.005, Double_t fV0CosPAmin = 0.995, Double_t fV0RapidityMax=0.5, Double_t fV0DecLengthMin=3.0, Double_t fV0DecLengthMax=100, Double_t fV0DCAToPrimVtx=1.5, Double_t fV0DCADiffDautMax=1.0, Double_t fV0DautDCAToPrimVtxMin = 0.02, const char *suffix = "")
 {
 
   printf("===================================================================================\n");
@@ -88,19 +88,21 @@ void AddTaskLambdaPIDCorr(Int_t gFilterBit = 768,Double_t fV0PtMin=0.2,Double_t 
   /// Re-use Some AddTask Variables:
   taskLambda->SetV0PtMin(fV0PtMin);                        
   taskLambda->SetV0CPAMin(fV0CosPAmin);                             
-  taskLambda->SetMassMean(fV0MassMean);                             
-  taskLambda->SetLambdaMassCut(fV0MassCut);                   
   taskLambda->SetV0RapidityMax(fV0RapidityMax);                   
   taskLambda->SetV0DecayLengthMax(fV0DecLengthMax);             
   taskLambda->SetV0DecayLengthMin(fV0DecLengthMin);             
   taskLambda->SetV0DCAToPrimVtxMax(fV0DCAToPrimVtx);           
   //V0 Daughter Cut
+  taskLambda->SetDaughtersPIDUseTOF(bDaughterUseTOF);
   taskLambda->SetDaughtersNsigma(nSigTPC);       
   taskLambda->SetDaughtersPtMax(fDautPtMax);                 
   taskLambda->SetDaughtersEtaMax(fDautEtaMax);                        
   taskLambda->SetDaughtersTPCNclsMin(gNclustTPC);    /// Note: same TPC ncluster for Charge and V0 Daughter. Could be changed for different values.
   taskLambda->SetV0DcaBetweenDaughtersMax(fV0DCADiffDautMax);
   taskLambda->SetDaughtersDCAToPrimVtxMin(fV0DautDCAToPrimVtxMin);
+  //Lambda Mass Cut
+  taskLambda->SetMassMean(fV0MassMean);                             
+  taskLambda->SetLambdaMassCut(fV0MassCut);                   
   //--------------------------------------------------------------------------
 
   
