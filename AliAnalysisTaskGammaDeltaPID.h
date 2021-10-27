@@ -375,12 +375,14 @@ class AliAnalysisTaskGammaDeltaPID : public AliAnalysisTaskSE {
   /// chunzheng: Lambda QA Info
   TH1D             *fHistLambdaPt[2];      //! [0]:Before the Mass Cut [1]:After the Mass Cut
   TH1D             *fHistLambdaEta[2];     //!
+  TH1D             *fHistLambdaPhi[2];
   TH1D             *fHistLambdaDcaToPrimVertex[2]; //!
   TH1D             *fHistLambdaCPA[2];     //!
   TH1D             *fHistLambdaDecayLength[2];     //!
   TH1D             *fHistLambdaMass[2];    //!
   TH1D             *fHistAntiLambdaPt[2];  //!
   TH1D             *fHistAntiLambdaEta[2]; //!
+  TH1D             *fHistAntiLambdaPhi[2];
   TH1D             *fHistAntiLambdaDcaToPrimVertex[2]; //!
   TH1D             *fHistAntiLambdaCPA[2]; //!
   TH1D             *fHistAntiLambdaDecayLength[2]; //!

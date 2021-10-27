@@ -285,12 +285,14 @@ AliAnalysisTaskGammaDeltaPID::AliAnalysisTaskGammaDeltaPID(const char *name):
   for (int i = 0; i < 2; i++) {
     fHistLambdaPt[i]              = NULL;            
     fHistLambdaEta[i]             = NULL;
+    fHistLambdaPhi[i]             = NULL;
     fHistLambdaDcaToPrimVertex[i] = NULL;
     fHistLambdaCPA[i]             = NULL;
     fHistLambdaDecayLength[i]     = NULL;
     fHistLambdaMass[i]            = NULL;
     fHistAntiLambdaPt[i]          = NULL;
     fHistAntiLambdaEta[i]         = NULL;
+    fHistAntiLambdaPhi[i]         = NULL;
     fHistAntiLambdaDcaToPrimVertex[i] = NULL;
     fHistAntiLambdaCPA[i]         = NULL;
     fHistAntiLambdaDecayLength[i] = NULL;
@@ -522,12 +524,14 @@ AliAnalysisTaskGammaDeltaPID::AliAnalysisTaskGammaDeltaPID():
   for (int i = 0; i < 2; i++) {
     fHistLambdaPt[i]              = NULL;            
     fHistLambdaEta[i]             = NULL;
+    fHistLambdaPhi[i]             = NULL;
     fHistLambdaDcaToPrimVertex[i] = NULL;
     fHistLambdaCPA[i]             = NULL;
     fHistLambdaDecayLength[i]     = NULL;
     fHistLambdaMass[i]            = NULL;
     fHistAntiLambdaPt[i]          = NULL;
     fHistAntiLambdaEta[i]         = NULL;
+    fHistAntiLambdaPhi[i]         = NULL;
     fHistAntiLambdaDcaToPrimVertex[i] = NULL;
     fHistAntiLambdaCPA[i]         = NULL;
     fHistAntiLambdaDecayLength[i] = NULL;
@@ -1422,6 +1426,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
         Double_t massLambda  = v0->MassLambda();
         fHistLambdaPt[0]              -> Fill(pt);
         fHistLambdaEta[0]             -> Fill(eta);
+        fHistLambdaPhi[0]             -> Fill(phi);
         fHistLambdaDcaToPrimVertex[0] -> Fill(dcaToPV);
         fHistLambdaCPA[0]             -> Fill(CPA);
         fHistLambdaDecayLength[0]     -> Fill(dl);
@@ -1431,6 +1436,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
         if (TMath::Abs(massLambda - fMassMean) < fLambdaMassCut) {
           fHistLambdaPt[1]              -> Fill(pt);
           fHistLambdaEta[1]             -> Fill(eta);
+          fHistLambdaPhi[1]             -> Fill(phi);
           fHistLambdaDcaToPrimVertex[1] -> Fill(dcaToPV);
           fHistLambdaCPA[1]             -> Fill(CPA);
           fHistLambdaDecayLength[1]     -> Fill(dl);
@@ -1448,6 +1454,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
         Double_t massAntiLambda  = v0->MassAntiLambda();
         fHistAntiLambdaPt[0]              -> Fill(pt);
         fHistAntiLambdaEta[0]             -> Fill(eta);
+        fHistAntiLambdaPhi[0]             -> Fill(phi);
         fHistAntiLambdaDcaToPrimVertex[0] -> Fill(dcaToPV);
         fHistAntiLambdaCPA[0]             -> Fill(CPA);
         fHistAntiLambdaDecayLength[0]     -> Fill(dl);
@@ -1457,6 +1464,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
         if (TMath::Abs(massAntiLambda - fMassMean) < fLambdaMassCut) {
           fHistAntiLambdaPt[1]              -> Fill(pt);
           fHistAntiLambdaEta[1]             -> Fill(eta);
+          fHistAntiLambdaPhi[1]             -> Fill(eta);
           fHistAntiLambdaDcaToPrimVertex[1] -> Fill(dcaToPV);
           fHistAntiLambdaCPA[1]             -> Fill(CPA);
           fHistAntiLambdaDecayLength[1]     -> Fill(dl);
@@ -1889,6 +1897,8 @@ void AliAnalysisTaskGammaDeltaPID::SetupQAHistograms(){
     fListHist->Add(fHistLambdaPt[i]);
     fHistLambdaEta[i] = new TH1D(Form("hLambdaEta_%sMassCut",name),"",200, -10., 10.);
     fListHist->Add(fHistLambdaEta[i]);
+    fHistLambdaPhi[i] = new TH1D(Form("hLambdaPhi_%sMassCut",name),"", 200, -TMath::TwoPi(), TMath::TwoPi());
+    fListHist->Add(fHistLambdaPhi[i]);
     fHistLambdaDcaToPrimVertex[i] = new TH1D(Form("hLambdaDcaToPrimVertex_%sMassCut",name),"",200, 0., 20.);
     fListHist->Add(fHistLambdaDcaToPrimVertex[i]);
     fHistLambdaCPA[i] = new TH1D(Form("hLambdaCPA_%sMassCut",name),"",200, 0.9, 1.);
@@ -1905,6 +1915,8 @@ void AliAnalysisTaskGammaDeltaPID::SetupQAHistograms(){
     fListHist->Add(fHistAntiLambdaPt[i]);
     fHistAntiLambdaEta[i] = new TH1D(Form("hAntiLambdaEta_%sMassCut",name),"",200, -10., 10.);
     fListHist->Add(fHistAntiLambdaEta[i]);
+    fHistAntiLambdaPhi[i] = new TH1D(Form("hLambdaPhi_%sMassCut",name),"", 200, -TMath::TwoPi(), TMath::TwoPi());
+    fListHist->Add(fHistAntiLambdaPhi[i]);
     fHistAntiLambdaDcaToPrimVertex[i] = new TH1D(Form("hAntiLambdaDcaToPrimVertex_%sMassCut",name),"",200, 0., 20.);
     fListHist->Add(fHistAntiLambdaDcaToPrimVertex[i]);
     fHistAntiLambdaCPA[i] = new TH1D(Form("hAntiLambdaCPA_%sMassCut",name),"",200, 0.9, 1.);
