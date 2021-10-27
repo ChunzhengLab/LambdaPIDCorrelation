@@ -1125,6 +1125,18 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
 	    else if(isItKaontrk1) code = -321;
 	    else if(isItProttrk1) code = -2212;
 	  }
+
+    // if(trk1Chrg > 0) {
+    //   code = 999;
+	  //   if(isItPiontrk1)      {code = 211;   ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,1);}
+	  //   else if(isItKaontrk1) {code = 321;   ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,2);}
+	  //   else if(isItProttrk1) {code = 2212;  ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,3);}
+	  // } else{  /// 
+    //   code = -999;
+	  //   if(isItPiontrk1)      {code = -211;  ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,1);}
+	  //   else if(isItKaontrk1) {code = -321;  ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,2);}
+	  //   else if(isItProttrk1) {code = -2212; ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,3);}
+	  // }
 	  
 	  Int_t trk1ID = AODtrack1->GetID();//unique in a event
 	  vecPDGCode.push_back(code);
