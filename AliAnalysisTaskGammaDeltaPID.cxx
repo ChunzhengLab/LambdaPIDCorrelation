@@ -1115,14 +1115,15 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
 	  isItProttrk1 = CheckPIDofParticle(AODtrack1,3); // 3=proton
 	
 	  if(trk1Chrg > 0) {
+      code = 999;
 	    if(isItPiontrk1)      code = 211;
 	    else if(isItKaontrk1) code = 321;
 	    else if(isItProttrk1) code = 2212;
-	  }
-	  else{  /// 
-	   if(isItPiontrk1)      code = -211;
-	   else if(isItKaontrk1) code = -321;
-	   else if(isItProttrk1) code = -2212;
+	  } else{  /// 
+      code = -999;
+	    if(isItPiontrk1)      code = -211;
+	    else if(isItKaontrk1) code = -321;
+	    else if(isItProttrk1) code = -2212;
 	  }
 	  
 	  Int_t trk1ID = AODtrack1->GetID();//unique in a event
@@ -1359,8 +1360,8 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
     ////////-----> Starting V0 Loop -----------
     vector<Int_t>    vecLambdaCode;
     vector<Double_t> vecLambdaPhi;
-    vector<Int_t>    vecLambdaPosID; // Daughter ID
-    vector<Int_t>    vecLambdaNegID; // Daughter ID
+    vector<Int_t>    vecDaughterPosID; // Daughter ID
+    vector<Int_t>    vecDaughterNegID; // Daughter ID
 
     fCurrentVtx[0] = -999;
     fCurrentVtx[1] = -999;
@@ -1426,8 +1427,8 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
 
           vecLambdaCode.push_back(code);
           vecLambdaPhi.push_back(phi);
-          vecLambdaPosID.push_back(id_posDaughter);
-          vecLambdaNegID.push_back(id_negDaughter);
+          vecDaughterPosID.push_back(id_posDaughter);
+          vecDaughterNegID.push_back(id_negDaughter);
         }
       } 
 
@@ -1452,8 +1453,8 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
           
           vecLambdaCode.push_back(code);
           vecLambdaPhi.push_back(phi);
-          vecLambdaPosID.push_back(id_posDaughter);
-          vecLambdaNegID.push_back(id_negDaughter);
+          vecDaughterPosID.push_back(id_posDaughter);
+          vecDaughterNegID.push_back(id_negDaughter);
         }
       } 
     }
@@ -1471,14 +1472,14 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
 
         Int_t code_lambda = vecLambdaCode[jLambda];
 	      Double_t phi_lambda = vecLambdaPhi[jLambda];
-	      Int_t id_posDaughter = vecLambdaPosID[jLambda];
-	      Int_t id_negDaughter = vecLambdaNegID[jLambda];
+	      Int_t id_posDaughter = vecDaughterPosID[jLambda];
+	      Int_t id_negDaughter = vecDaughterNegID[jLambda];
 	      if(id == id_posDaughter || id == id_negDaughter) continue;  // checking if charged particle is daughter itself.
     
 	      //Remove AutoCorrelation:
-	      Double_t fTPCQxTemp = 0, fTPCQyTemp = 0; ///Get the Total sum of Qx,Qy  locally, then Remove AutoCorr if needed.
-	      Double_t qx=0, qy=0;
-	      Double_t fTPCMult = 0;
+	      Double_t fTPCQxTemp = 0., fTPCQyTemp = 0.; ///Get the Total sum of Qx,Qy  locally, then Remove AutoCorr if needed.
+	      Double_t qx = 0., qy = 0.;
+	      Double_t fTPCMult = 0.;
 	    
 	      if(eta > 0) {// use EP from opposite eta than the charged track! One way to remove AutoCorrelation.
 	        fTPCQxTemp = fSumQnxNeg[0];
@@ -1490,15 +1491,15 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
 	    
           if (iterPosDaughter != vecNegEPTrkID.end()) {
             Int_t iPosDaughter = distance(vecNegEPTrkID.begin(), iterPosDaughter);
-            qx += TMath::Cos(2 * vecPhi[iPosDaughter]);
-            qy += TMath::Sin(2 * vecPhi[iPosDaughter]);
+            qx +=  vecNUAWeight[iPosDaughter] * TMath::Cos(2 * vecPhi[iPosDaughter]);
+            qy +=  vecNUAWeight[iPosDaughter] * TMath::Sin(2 * vecPhi[iPosDaughter]);
             fTPCMult -= 1;
           }
 
           if (iterNegDaughter != vecNegEPTrkID.end()) {
             Int_t iNegDaughter = distance(vecNegEPTrkID.begin(), iterNegDaughter);
-            qx += TMath::Cos(2 * vecPhi[iNegDaughter]);
-            qy += TMath::Sin(2 * vecPhi[iNegDaughter]);
+            qx += vecNUAWeight[iNegDaughter] * TMath::Cos(2 * vecPhi[iNegDaughter]);
+            qy += vecNUAWeight[iNegDaughter] * TMath::Sin(2 * vecPhi[iNegDaughter]);
             fTPCMult -= 1;
           }
 	      } else { ///for -ve EP
@@ -1511,15 +1512,15 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
 
 	        if (iterPosDaughter != vecPosEPTrkID.end()) {
             Int_t iPosDaughter = distance(vecPosEPTrkID.begin(), iterPosDaughter);
-            qx += TMath::Cos(2 * vecPhi[iPosDaughter]);
-            qy += TMath::Sin(2 * vecPhi[iPosDaughter]);
+            qx += vecNUAWeight[iPosDaughter] * TMath::Cos(2 * vecPhi[iPosDaughter]);
+            qy += vecNUAWeight[iPosDaughter] * TMath::Sin(2 * vecPhi[iPosDaughter]);
             fTPCMult -= 1;
           }
     
           if (iterNegDaughter != vecPosEPTrkID.end()) {
             Int_t iNegDaughter = distance(vecPosEPTrkID.begin(), iterNegDaughter);
-            qx += TMath::Cos(2 * vecPhi[iNegDaughter]);
-            qy += TMath::Sin(2 * vecPhi[iNegDaughter]);
+            qx +=  vecNUAWeight[iNegDaughter] * TMath::Cos(2 * vecPhi[iNegDaughter]);
+            qy +=  vecNUAWeight[iNegDaughter] * TMath::Sin(2 * vecPhi[iNegDaughter]);
             fTPCMult -= 1;
           }
 	      }/// for PosEP 
