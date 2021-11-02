@@ -272,6 +272,22 @@ AliAnalysisTaskGammaDeltaPID::AliAnalysisTaskGammaDeltaPID(const char *name):
   fProfileGammaTPC_AntiLambda_hNeg(NULL),
   fProfileGammaTPC_AntiLambda_Proton(NULL),
   fProfileGammaTPC_AntiLambda_AntiProton(NULL),  
+  fProfileGammaV0C_Lambda_hPos(NULL),
+  fProfileGammaV0C_Lambda_hNeg(NULL),
+  fProfileGammaV0C_Lambda_Proton(NULL),
+  fProfileGammaV0C_Lambda_AntiProton(NULL),
+  fProfileGammaV0C_AntiLambda_hPos(NULL),
+  fProfileGammaV0C_AntiLambda_hNeg(NULL),
+  fProfileGammaV0C_AntiLambda_Proton(NULL),
+  fProfileGammaV0C_AntiLambda_AntiProton(NULL),
+  fProfileGammaV0A_Lambda_hPos(NULL),
+  fProfileGammaV0A_Lambda_hNeg(NULL),
+  fProfileGammaV0A_Lambda_Proton(NULL),
+  fProfileGammaV0A_Lambda_AntiProton(NULL),
+  fProfileGammaV0A_AntiLambda_hPos(NULL),
+  fProfileGammaV0A_AntiLambda_hNeg(NULL),
+  fProfileGammaV0A_AntiLambda_Proton(NULL),
+  fProfileGammaV0A_AntiLambda_AntiProton(NULL),
   hEmptyPointerFortheList(NULL)  
 {
   
@@ -512,6 +528,22 @@ AliAnalysisTaskGammaDeltaPID::AliAnalysisTaskGammaDeltaPID():
   fProfileGammaTPC_AntiLambda_hNeg(NULL),
   fProfileGammaTPC_AntiLambda_Proton(NULL),
   fProfileGammaTPC_AntiLambda_AntiProton(NULL),    
+  fProfileGammaV0C_Lambda_hPos(NULL),
+  fProfileGammaV0C_Lambda_hNeg(NULL),
+  fProfileGammaV0C_Lambda_Proton(NULL),
+  fProfileGammaV0C_Lambda_AntiProton(NULL),
+  fProfileGammaV0C_AntiLambda_hPos(NULL),
+  fProfileGammaV0C_AntiLambda_hNeg(NULL),
+  fProfileGammaV0C_AntiLambda_Proton(NULL),
+  fProfileGammaV0C_AntiLambda_AntiProton(NULL),
+  fProfileGammaV0A_Lambda_hPos(NULL),
+  fProfileGammaV0A_Lambda_hNeg(NULL),
+  fProfileGammaV0A_Lambda_Proton(NULL),
+  fProfileGammaV0A_Lambda_AntiProton(NULL),
+  fProfileGammaV0A_AntiLambda_hPos(NULL),
+  fProfileGammaV0A_AntiLambda_hNeg(NULL),
+  fProfileGammaV0A_AntiLambda_Proton(NULL),
+  fProfileGammaV0A_AntiLambda_AntiProton(NULL),  
   hEmptyPointerFortheList(NULL)
 {
   //std::vector<Int_t> vecPosEPTrkID = {0};
@@ -1558,39 +1590,57 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
     
 	      Double_t delta = TMath::Cos(phi_lambda - phi);
 	      Double_t gammaTPC  = TMath::Cos(phi_lambda + phi - 2 *fPsiNTPCNoAuto);
-    
+        Double_t gammaV0C  = TMath::Cos(phi_lambda + phi - 2 *fPsiNV0C);
+        Double_t gammaV0A  = TMath::Cos(phi_lambda + phi - 2 *fPsiNV0A);
+
         if (code > 0 && code_lambda ==  3122) {
           fProfileDelta_Lambda_hPos        -> Fill(centrality, delta);
           fProfileGammaTPC_Lambda_hPos     -> Fill(centrality, gammaTPC);
+          fProfileGammaV0C_Lambda_hPos     -> Fill(centrality, gammaV0C);
+          fProfileGammaV0A_Lambda_hPos     -> Fill(centrality, gammaV0A);
         }
         if (code < 0 && code_lambda ==  3122) {
           fProfileDelta_Lambda_hNeg        -> Fill(centrality, delta);
           fProfileGammaTPC_Lambda_hNeg     -> Fill(centrality, gammaTPC);
+          fProfileGammaV0C_Lambda_hNeg     -> Fill(centrality, gammaV0C);
+          fProfileGammaV0A_Lambda_hNeg     -> Fill(centrality, gammaV0A);
         } 
         if (code > 0 && code_lambda == -3122) {
           fProfileDelta_AntiLambda_hPos    -> Fill(centrality, delta);
           fProfileGammaTPC_AntiLambda_hPos -> Fill(centrality, gammaTPC);
+          fProfileGammaV0C_AntiLambda_hPos -> Fill(centrality, gammaV0C);
+          fProfileGammaV0A_AntiLambda_hPos -> Fill(centrality, gammaV0A);
         }
         if (code < 0 && code_lambda == -3122) {
           fProfileDelta_AntiLambda_hNeg    -> Fill(centrality, delta);
           fProfileGammaTPC_AntiLambda_hNeg -> Fill(centrality, gammaTPC);
+          fProfileGammaV0C_AntiLambda_hNeg -> Fill(centrality, gammaV0C);
+          fProfileGammaV0A_AntiLambda_hNeg -> Fill(centrality, gammaV0A);
         }
     
         if (code ==  2212 && code_lambda ==  3122) {
           fProfileDelta_Lambda_Proton      -> Fill(centrality, delta);
           fProfileGammaTPC_Lambda_Proton   -> Fill(centrality, gammaTPC);
+          fProfileGammaV0C_Lambda_Proton   -> Fill(centrality, gammaV0C);
+          fProfileGammaV0A_Lambda_Proton   -> Fill(centrality, gammaV0A);
         }
         if (code == -2212 && code_lambda ==  3122) {
           fProfileDelta_Lambda_AntiProton    -> Fill(centrality, delta);
           fProfileGammaTPC_Lambda_AntiProton -> Fill(centrality, gammaTPC);
+          fProfileGammaV0C_Lambda_AntiProton -> Fill(centrality, gammaV0C);
+          fProfileGammaV0A_Lambda_AntiProton -> Fill(centrality, gammaV0A);
         }
         if (code ==  2212 && code_lambda == -3122) {
           fProfileDelta_AntiLambda_Proton    -> Fill(centrality, delta);
           fProfileGammaTPC_AntiLambda_Proton -> Fill(centrality, gammaTPC);
+          fProfileGammaV0C_AntiLambda_Proton -> Fill(centrality, gammaV0C);
+          fProfileGammaV0A_AntiLambda_Proton -> Fill(centrality, gammaV0A);
         }
         if (code == -2212 && code_lambda == -3122) {
           fProfileDelta_AntiLambda_AntiProton    -> Fill(centrality, delta);
           fProfileGammaTPC_AntiLambda_AntiProton -> Fill(centrality, gammaTPC);
+          fProfileGammaV0C_AntiLambda_AntiProton -> Fill(centrality, gammaV0C);
+          fProfileGammaV0A_AntiLambda_AntiProton -> Fill(centrality, gammaV0A);
         }
 	    }// (Anti)Lambda-X pair done 
 
@@ -1931,7 +1981,8 @@ void AliAnalysisTaskGammaDeltaPID::SetupQAHistograms(){
 
 
   ///Gamma Correlators:
-   ///Lambda - X
+  //TPC Plane
+  ///Lambda - X
   fProfileGammaTPC_Lambda_hPos = new TProfile("fProfileGammaTPC_Lambda_hPos","",20,0,100);
   fListHist->Add(fProfileGammaTPC_Lambda_hPos);
   fProfileGammaTPC_Lambda_hNeg = new TProfile("fProfileGammaTPC_Lambda_hNeg","",20,0,100);
@@ -1950,6 +2001,48 @@ void AliAnalysisTaskGammaDeltaPID::SetupQAHistograms(){
   fListHist->Add(fProfileGammaTPC_AntiLambda_Proton);
   fProfileGammaTPC_AntiLambda_AntiProton = new TProfile("fProfileGammaTPC_AntiLambda_AntiProton","",20,0,100);  
   fListHist->Add(fProfileGammaTPC_AntiLambda_AntiProton);
+
+  //V0C Plane
+  ///Lambda - X
+  fProfileGammaV0C_Lambda_hPos = new TProfile("fProfileGammaV0C_Lambda_hPos","",20,0,100);
+  fListHist->Add(fProfileGammaV0C_Lambda_hPos);
+  fProfileGammaV0C_Lambda_hNeg = new TProfile("fProfileGammaV0C_Lambda_hNeg","",20,0,100);
+  fListHist->Add(fProfileGammaV0C_Lambda_hNeg);
+  fProfileGammaV0C_Lambda_Proton = new TProfile("fProfileGammaV0C_Lambda_Proton","",20,0,100);
+  fListHist->Add(fProfileGammaV0C_Lambda_Proton);
+  fProfileGammaV0C_Lambda_AntiProton = new TProfile("fProfileGammaV0C_Lambda_AntiProton","",20,0,100);  
+  fListHist->Add(fProfileGammaV0C_Lambda_AntiProton);
+
+  ///AntiLambda - X
+  fProfileGammaV0C_AntiLambda_hPos = new TProfile("fProfileGammaV0C_AntiLambda_hPos","",20,0,100);
+  fListHist->Add(fProfileGammaV0C_AntiLambda_hPos);
+  fProfileGammaV0C_AntiLambda_hNeg = new TProfile("fProfileGammaV0C_AntiLambda_hNeg","",20,0,100);
+  fListHist->Add(fProfileGammaV0C_AntiLambda_hNeg);
+  fProfileGammaV0C_AntiLambda_Proton = new TProfile("fProfileGammaV0C_AntiLambda_Proton","",20,0,100);
+  fListHist->Add(fProfileGammaV0C_AntiLambda_Proton);
+  fProfileGammaV0C_AntiLambda_AntiProton = new TProfile("fProfileGammaV0C_AntiLambda_AntiProton","",20,0,100);  
+  fListHist->Add(fProfileGammaV0C_AntiLambda_AntiProton);
+
+  //V0APlane
+  ///Lambda - X
+  fProfileGammaV0A_Lambda_hPos = new TProfile("fProfileGammaV0A_Lambda_hPos","",20,0,100);
+  fListHist->Add(fProfileGammaV0A_Lambda_hPos);
+  fProfileGammaV0A_Lambda_hNeg = new TProfile("fProfileGammaV0A_Lambda_hNeg","",20,0,100);
+  fListHist->Add(fProfileGammaV0A_Lambda_hNeg);
+  fProfileGammaV0A_Lambda_Proton = new TProfile("fProfileGammaV0A_Lambda_Proton","",20,0,100);
+  fListHist->Add(fProfileGammaV0A_Lambda_Proton);
+  fProfileGammaV0A_Lambda_AntiProton = new TProfile("fProfileGammaV0A_Lambda_AntiProton","",20,0,100);  
+  fListHist->Add(fProfileGammaV0A_Lambda_AntiProton);
+
+  ///AntiLambda - X
+  fProfileGammaV0A_AntiLambda_hPos = new TProfile("fProfileGammaV0A_AntiLambda_hPos","",20,0,100);
+  fListHist->Add(fProfileGammaV0A_AntiLambda_hPos);
+  fProfileGammaV0A_AntiLambda_hNeg = new TProfile("fProfileGammaV0A_AntiLambda_hNeg","",20,0,100);
+  fListHist->Add(fProfileGammaV0A_AntiLambda_hNeg);
+  fProfileGammaV0A_AntiLambda_Proton = new TProfile("fProfileGammaV0A_AntiLambda_Proton","",20,0,100);
+  fListHist->Add(fProfileGammaV0A_AntiLambda_Proton);
+  fProfileGammaV0A_AntiLambda_AntiProton = new TProfile("fProfileGammaV0A_AntiLambda_AntiProton","",20,0,100);  
+  fListHist->Add(fProfileGammaV0A_AntiLambda_AntiProton);
   
   ///Delta Correlators:
    ///Lambda - X

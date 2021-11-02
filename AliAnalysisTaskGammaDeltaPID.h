@@ -367,6 +367,24 @@ class AliAnalysisTaskGammaDeltaPID : public AliAnalysisTaskSE {
   TProfile       *fProfileGammaTPC_AntiLambda_hNeg; //!
   TProfile       *fProfileGammaTPC_AntiLambda_Proton;     //!
   TProfile       *fProfileGammaTPC_AntiLambda_AntiProton; //!
+
+  TProfile       *fProfileGammaV0C_Lambda_hPos; //!
+  TProfile       *fProfileGammaV0C_Lambda_hNeg; //!
+  TProfile       *fProfileGammaV0C_Lambda_Proton;     //!
+  TProfile       *fProfileGammaV0C_Lambda_AntiProton; //!
+  TProfile       *fProfileGammaV0C_AntiLambda_hPos; //!
+  TProfile       *fProfileGammaV0C_AntiLambda_hNeg; //!
+  TProfile       *fProfileGammaV0C_AntiLambda_Proton;     //!
+  TProfile       *fProfileGammaV0C_AntiLambda_AntiProton; //!
+
+  TProfile       *fProfileGammaV0A_Lambda_hPos; //!
+  TProfile       *fProfileGammaV0A_Lambda_hNeg; //!
+  TProfile       *fProfileGammaV0A_Lambda_Proton;     //!
+  TProfile       *fProfileGammaV0A_Lambda_AntiProton; //!
+  TProfile       *fProfileGammaV0A_AntiLambda_hPos; //!
+  TProfile       *fProfileGammaV0A_AntiLambda_hNeg; //!
+  TProfile       *fProfileGammaV0A_AntiLambda_Proton;     //!
+  TProfile       *fProfileGammaV0A_AntiLambda_AntiProton; //!
   
   TH1F          *hEmptyPointerFortheList;  //!  
 
