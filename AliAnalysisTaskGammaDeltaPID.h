@@ -197,12 +197,12 @@ class AliAnalysisTaskGammaDeltaPID : public AliAnalysisTaskSE {
   Float_t         fV0NegPionTPCNsigma; //!
   Float_t       fV0NegProtonTPCNsigma; //!
   Float_t         fV0PosPionTPCNsigma; //!
+  Bool_t            fV0DaughterUseTOF; //!
   Float_t       fV0PosProtonTOFNsigma; //!
   Float_t         fV0NegPionTOFNsigma; //!
   Float_t       fV0NegProtonTOFNsigma; //!
   Float_t         fV0PosPionTOFNsigma; //!
   //Lambda Mass
-  Bool_t            fV0DaughterUseTOF; //!
   Double_t                  fMassMean; //!
   Double_t             fLambdaMassCut; //!
 
@@ -367,7 +367,7 @@ class AliAnalysisTaskGammaDeltaPID : public AliAnalysisTaskSE {
   TProfile       *fProfileGammaTPC_AntiLambda_hNeg; //!
   TProfile       *fProfileGammaTPC_AntiLambda_Proton;     //!
   TProfile       *fProfileGammaTPC_AntiLambda_AntiProton; //!
-
+  
   TProfile       *fProfileGammaV0C_Lambda_hPos; //!
   TProfile       *fProfileGammaV0C_Lambda_hNeg; //!
   TProfile       *fProfileGammaV0C_Lambda_Proton;     //!

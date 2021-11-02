@@ -130,11 +130,11 @@ AliAnalysisTaskGammaDeltaPID::AliAnalysisTaskGammaDeltaPID(const char *name):
   fV0NegPionTPCNsigma(4.),
   fV0NegProtonTPCNsigma(4.),
   fV0PosPionTPCNsigma(4.),
+  fV0DaughterUseTOF(kFALSE),
   fV0PosProtonTOFNsigma(4.),
   fV0NegPionTOFNsigma(4.),
   fV0NegProtonTOFNsigma(4.),
   fV0PosPionTOFNsigma(4.),
-  fV0DaughterUseTOF(kFALSE),
   fMassMean(1.115683),
   fLambdaMassCut(0.005),
   vecPosEPTrkID(0),
@@ -385,11 +385,11 @@ AliAnalysisTaskGammaDeltaPID::AliAnalysisTaskGammaDeltaPID():
   fV0NegPionTPCNsigma(4.),
   fV0NegProtonTPCNsigma(4.),
   fV0PosPionTPCNsigma(4.),
+  fV0DaughterUseTOF(kFALSE),
   fV0PosProtonTOFNsigma(4.),
   fV0NegPionTOFNsigma(4.),
   fV0NegProtonTOFNsigma(4.),
   fV0PosPionTOFNsigma(4.),
-  fV0DaughterUseTOF(kFALSE),
   fMassMean(1.115683),
   fLambdaMassCut(0.005),
   vecPosEPTrkID(0),
@@ -1151,28 +1151,16 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
 	  isItProttrk1 = CheckPIDofParticle(AODtrack1,3); // 3=proton
 	
 	  if(trk1Chrg > 0) {
-      code = 999;
+      code = 999999;
 	    if(isItPiontrk1)      code = 211;
 	    else if(isItKaontrk1) code = 321;
 	    else if(isItProttrk1) code = 2212;
 	  } else{  /// 
-      code = -999;
+      code = -999999;
 	    if(isItPiontrk1)      code = -211;
 	    else if(isItKaontrk1) code = -321;
 	    else if(isItProttrk1) code = -2212;
 	  }
-
-    // if(trk1Chrg > 0) {
-    //   code = 999;
-	  //   if(isItPiontrk1)      {code = 211;   ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,1);}
-	  //   else if(isItKaontrk1) {code = 321;   ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,2);}
-	  //   else if(isItProttrk1) {code = 2212;  ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,3);}
-	  // } else{  /// 
-    //   code = -999;
-	  //   if(isItPiontrk1)      {code = -211;  ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,1);}
-	  //   else if(isItKaontrk1) {code = -321;  ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,2);}
-	  //   else if(isItProttrk1) {code = -2212; ptWgtMCPIDtrk1 = GetMCEfficiencyWeightForTrack(trk1Pt,trk1Chrg,3);}
-	  // }
 	  
 	  Int_t trk1ID = AODtrack1->GetID();//unique in a event
 	  vecPDGCode.push_back(code);
@@ -1408,8 +1396,8 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
     ////////-----> Starting V0 Loop -----------
     vector<Int_t>    vecLambdaCode;
     vector<Double_t> vecLambdaPhi;
-    vector<Int_t>    vecDaughterPosID; // Daughter ID
-    vector<Int_t>    vecDaughterNegID; // Daughter ID
+    vector<Int_t>    vecDaughterPosID; // Pos Daughter ID
+    vector<Int_t>    vecDaughterNegID; // Neg Daughter ID
 
     fCurrentVtx[0] = -999;
     fCurrentVtx[1] = -999;
@@ -1422,13 +1410,13 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
   
     for (Int_t iV0 = 0; iV0 < nV0s; iV0++) {
       AliAODv0 *v0 = fAOD->GetV0(iV0);
-      if (!v0) continue;
+      if(!v0) continue;
       //Basic kinematic variable
-      Double_t pt = v0->Pt();
+      Double_t pt  = v0->Pt();
       Double_t eta = v0->PseudoRapV0();
-      Double_t dcaToPV = v0->DcaV0ToPrimVertex();       //DCA to Primary Vertex
-      Double_t CPA = v0->CosPointingAngle(fCurrentVtx); //cosine pointing angle
-      Double_t dl = v0->DecayLengthV0(fCurrentVtx);
+      Double_t dcaToPV = v0->DcaV0ToPrimVertex();//DCA to Primary Vertex
+      Double_t CPA = v0->CosPointingAngle(fCurrentVtx);//cosine pointing angle
+      Double_t dl  = v0->DecayLengthV0(fCurrentVtx);
       fHistV0Pt->Fill(pt);
       fHistV0Eta->Fill(eta);
       fHistV0DcatoPrimVertex->Fill(dcaToPV);
@@ -1436,19 +1424,19 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
       fHistV0DecayLength->Fill(dl);
 
       //V0 cut
-      if (!IsGoodV0(v0)) continue;
-
+      if(!IsGoodV0(v0)) continue;
+    
       //V0 daughters cut
       AliAODTrack *nTrack = dynamic_cast<AliAODTrack *>(v0->GetDaughter(1));
       AliAODTrack *pTrack = dynamic_cast<AliAODTrack *>(v0->GetDaughter(0));
-
-      if (!(IsGoodDaughterTrack(nTrack)) || !(IsGoodDaughterTrack(pTrack))) continue;
+    
+      if(!(IsGoodDaughterTrack(nTrack)) || !(IsGoodDaughterTrack(pTrack))) continue;
       Float_t nDcaPV = v0->DcaNegToPrimVertex();
       Float_t pDcaPV = v0->DcaPosToPrimVertex();
-      if (nDcaPV < fDaughtersDCAToPrimVtxMin || pDcaPV < fDaughtersDCAToPrimVtxMin) continue;
+      if( nDcaPV<fDaughtersDCAToPrimVtxMin || pDcaPV<fDaughtersDCAToPrimVtxMin) continue;
 
       Int_t code = GetLambdaCode(pTrack,nTrack);
-      if (fabs(code) != 3122) continue;
+      if(fabs(code) != 3122) continue;
       TVector2 Vt(v0->MomV0X(), v0->MomV0Y());
       Double_t phi = Vt.Phi() > 0 ? Vt.Phi() : Vt.Phi() + TMath::TwoPi();
       Int_t id_posDaughter = v0->GetPosID();
@@ -1513,11 +1501,11 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
 
     //// Now fill Lambda-X correlations:
     for (vector<Double_t>::size_type iTrk = 0; iTrk < vecPhi.size(); iTrk++) {
-      Int_t id = vecID[iTrk];
-      Int_t code = vecPDGCode[iTrk];
-      Double_t pt = vecPt[iTrk];
-      Double_t eta = vecEta[iTrk];
-      Double_t phi = vecPhi[iTrk];
+      Int_t    id   = vecID[iTrk];
+      Int_t    code = vecPDGCode[iTrk];
+      Double_t pt   = vecPt[iTrk];
+      Double_t eta  = vecEta[iTrk];
+      Double_t phi  = vecPhi[iTrk];
 
       //Lambda - X
       for (vector<Double_t>::size_type jLambda = 0; jLambda < vecLambdaPhi.size(); jLambda++) {
