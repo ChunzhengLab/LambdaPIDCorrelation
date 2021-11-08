@@ -1953,7 +1953,7 @@ void AliAnalysisTaskGammaDeltaPID::SetupQAHistograms(){
     fListHist->Add(fHistAntiLambdaPt[i]);
     fHistAntiLambdaEta[i] = new TH1D(Form("hAntiLambdaEta_%sMassCut",name),"",200, -10., 10.);
     fListHist->Add(fHistAntiLambdaEta[i]);
-    fHistAntiLambdaPhi[i] = new TH1D(Form("hLambdaPhi_%sMassCut",name),"", 360, 0, TMath::TwoPi());
+    fHistAntiLambdaPhi[i] = new TH1D(Form("hLambdaAntiPhi_%sMassCut",name),"", 360, 0, TMath::TwoPi());
     fListHist->Add(fHistAntiLambdaPhi[i]);
     fHistAntiLambdaDcaToPrimVertex[i] = new TH1D(Form("hAntiLambdaDcaToPrimVertex_%sMassCut",name),"",200, 0., 20.);
     fListHist->Add(fHistAntiLambdaDcaToPrimVertex[i]);
