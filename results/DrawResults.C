@@ -171,88 +171,97 @@ void DrawResults() {
   fProfileAntiLambdaMassVsPt[1] = (TProfile*)inputList->FindObject("pAntiLambdaMassVsPt_AfterMassCut");
 
   gStyle->SetOptStat(0);
-  // TCanvas* cLambdaQA = new TCanvas("LambdaQA","LambdaQA",1000,800);
-  // cLambdaQA->Divide(3,2);
-  // cLambdaQA->cd(1);  
-  // TH2D* dummy1 = new TH2D("","",1,1.1,1.13,1,0,50.e6);
-  // dummy1->Draw();
-  // fHistLambdaMass[0]->SetMarkerColor(ci[0]);
-  // fHistLambdaMass[0]->SetLineColor(ci[0]);
-  // fHistAntiLambdaMass[0]->SetMarkerColor(ci[1]);
-  // fHistAntiLambdaMass[0]->SetLineColor(ci[1]);
-  // fHistLambdaMass[0]->Draw("same");
-  // //fHistAntiLambdaMass[0]->Draw("same");
+  TCanvas* cLambdaQA = new TCanvas("LambdaQA","LambdaQA",1000,800);
+  cLambdaQA->Divide(3,2);
+  cLambdaQA->cd(1);  
+  TH2D* dummy1 = new TH2D("","",1,1.1,1.13,1,0,50.e6);
+  dummy1->Draw();
+  fHistLambdaMass[0]->SetMarkerColor(ci[0]);
+  fHistLambdaMass[0]->SetLineColor(ci[0]);
+  fHistAntiLambdaMass[0]->SetMarkerColor(ci[1]);
+  fHistAntiLambdaMass[0]->SetLineColor(ci[1]);
+  fHistLambdaMass[1]->SetMarkerColor(ci[2]);
+  fHistLambdaMass[1]->SetLineColor(ci[2]);
+  fHistAntiLambdaMass[1]->SetMarkerColor(ci[3]);
+  fHistAntiLambdaMass[1]->SetLineColor(ci[3]);
+  fHistLambdaMass[1]->Draw("same");
+  fHistAntiLambdaMass[1]->Draw("same");
+  fHistLambdaMass[0]->Draw("same");
+  fHistAntiLambdaMass[0]->Draw("same");
 
-  // cLambdaQA->cd(2);
-  // TH2D* dummy2 = new TH2D("","",1,0,15.,1,1.1,1.13);
-  // dummy2->Draw();
-  // fProfileLambdaMassVsPt[0]->SetMarkerColor(ci[0]);
-  // fProfileLambdaMassVsPt[0]->SetLineColor(ci[0]);
-  // fProfileAntiLambdaMassVsPt[0]->SetMarkerColor(ci[1]);
-  // fProfileAntiLambdaMassVsPt[0]->SetLineColor(ci[1]);
+  cLambdaQA->cd(2);
 
-  // fProfileLambdaMassVsPt[1]->SetMarkerColor(ci[0]);
-  // fProfileLambdaMassVsPt[1]->SetLineColor(ci[0]);
-  // fProfileAntiLambdaMassVsPt[1]->SetMarkerColor(ci[1]);
-  // fProfileAntiLambdaMassVsPt[1]->SetLineColor(ci[1]);
+  fProfileLambdaMassVsPt[0]->SetMarkerColor(ci[0]);
+  fProfileLambdaMassVsPt[0]->SetLineColor(ci[0]);
+  fProfileAntiLambdaMassVsPt[0]->SetMarkerColor(ci[1]);
+  fProfileAntiLambdaMassVsPt[0]->SetLineColor(ci[1]);
+  fProfileLambdaMassVsPt[0]->Draw("same");
+  fProfileAntiLambdaMassVsPt[0]->Draw("same");
 
-  // fProfileLambdaMassVsPt[0]->Draw("same");
-  // fProfileAntiLambdaMassVsPt[0]->Draw("same");
-  // fProfileLambdaMassVsPt[1]->Draw("same");
-  // fProfileAntiLambdaMassVsPt[1]->Draw("same");
+  cLambdaQA->cd(3);
+  TH2D* dummy2 = new TH2D("","",1,0,15.,1,1.11,1.12);
+  dummy2->Draw();
+  fProfileLambdaMassVsPt[1]->SetMarkerColor(ci[0]);
+  fProfileLambdaMassVsPt[1]->SetLineColor(ci[0]);
+  fProfileAntiLambdaMassVsPt[1]->SetMarkerColor(ci[1]);
+  fProfileAntiLambdaMassVsPt[1]->SetLineColor(ci[1]);
+  fProfileLambdaMassVsPt[1]->Draw("same");
+  fProfileAntiLambdaMassVsPt[1]->Draw("same");
 
-  // cLambdaQA->cd(3);
-  // fHistLambdaPt[0]->SetMarkerColor(ci[0]);
-  // fHistLambdaPt[0]->SetLineColor(ci[0]);
-  // fHistAntiLambdaPt[0]->SetMarkerColor(ci[1]);
-  // fHistAntiLambdaPt[0]->SetLineColor(ci[1]);
-  // fHistLambdaPt[1]->SetMarkerColor(ci[0]);
-  // fHistLambdaPt[1]->SetLineColor(ci[0]);
-  // fHistAntiLambdaPt[1]->SetMarkerColor(ci[1]);
-  // fHistAntiLambdaPt[1]->SetLineColor(ci[1]);
+  cLambdaQA->cd(4);
+  fHistLambdaPt[0]->SetMarkerColor(ci[0]);
+  fHistLambdaPt[0]->SetLineColor(ci[0]);
+  fHistAntiLambdaPt[0]->SetMarkerColor(ci[1]);
+  fHistAntiLambdaPt[0]->SetLineColor(ci[1]);
+  fHistLambdaPt[1]->SetMarkerColor(ci[0]);
+  fHistLambdaPt[1]->SetLineColor(ci[0]);
+  fHistAntiLambdaPt[1]->SetMarkerColor(ci[1]);
+  fHistAntiLambdaPt[1]->SetLineColor(ci[1]);
 
-  // fHistLambdaPt[0]->Draw("same");
-  // fHistAntiLambdaPt[0]->Draw("same");
-  // fHistLambdaPt[1]->Draw("same");
-  // fHistAntiLambdaPt[1]->Draw("same");
+  fHistLambdaPt[0]->Draw("same");
+  fHistAntiLambdaPt[0]->Draw("same");
+  fHistLambdaPt[1]->Draw("same");
+  fHistAntiLambdaPt[1]->Draw("same");
 
-  // cLambdaQA->cd(4);
-  // fHistLambdaEta[0]->SetMarkerColor(ci[0]);
-  // fHistLambdaEta[0]->SetLineColor(ci[0]);
-  // fHistAntiLambdaEta[0]->SetMarkerColor(ci[1]);
-  // fHistAntiLambdaEta[0]->SetLineColor(ci[1]);
-  // fHistLambdaEta[1]->SetMarkerColor(ci[0]);
-  // fHistLambdaEta[1]->SetLineColor(ci[0]);
-  // fHistAntiLambdaEta[1]->SetMarkerColor(ci[1]);
-  // fHistAntiLambdaEta[1]->SetLineColor(ci[1]);
+  cLambdaQA->cd(5);
+  fHistLambdaEta[0]->SetMarkerColor(ci[0]);
+  fHistLambdaEta[0]->SetLineColor(ci[0]);
+  fHistAntiLambdaEta[0]->SetMarkerColor(ci[1]);
+  fHistAntiLambdaEta[0]->SetLineColor(ci[1]);
+  fHistLambdaEta[1]->SetMarkerColor(ci[0]);
+  fHistLambdaEta[1]->SetLineColor(ci[0]);
+  fHistAntiLambdaEta[1]->SetMarkerColor(ci[1]);
+  fHistAntiLambdaEta[1]->SetLineColor(ci[1]);
 
-  // fHistLambdaEta[0]->Draw("same");
-  // fHistAntiLambdaEta[0]->Draw("same");
-  // fHistLambdaEta[1]->Draw("same");
-  // fHistAntiLambdaEta[1]->Draw("same");
+  fHistLambdaEta[0]->Draw("same");
+  fHistAntiLambdaEta[0]->Draw("same");
+  fHistLambdaEta[1]->Draw("same");
+  fHistAntiLambdaEta[1]->Draw("same");
 
-  // cLambdaQA->cd(5);
-  // fHistLambdaPhi[0]->SetMarkerColor(ci[0]);
-  // fHistLambdaPhi[0]->SetLineColor(ci[0]);
-  // //fHistAntiLambdaPhi[0]->SetMarkerColor(ci[1]);
-  // //fHistAntiLambdaPhi[0]->SetLineColor(ci[1]);
-  // fHistLambdaPhi[1]->SetMarkerColor(ci[0]);
-  // fHistLambdaPhi[1]->SetLineColor(ci[0]);
-  // //fHistAntiLambdaPhi[1]->SetMarkerColor(ci[1]);
-  // //fHistAntiLambdaPhi[1]->SetLineColor(ci[1]);
+  cLambdaQA->cd(6);
+  fHistLambdaPhi[0]->SetMarkerColor(ci[0]);
+  fHistLambdaPhi[0]->SetLineColor(ci[0]);
+  //fHistAntiLambdaPhi[0]->SetMarkerColor(ci[1]);
+  //fHistAntiLambdaPhi[0]->SetLineColor(ci[1]);
+  fHistLambdaPhi[1]->SetMarkerColor(ci[0]);
+  fHistLambdaPhi[1]->SetLineColor(ci[0]);
+  //fHistAntiLambdaPhi[1]->SetMarkerColor(ci[1]);
+  //fHistAntiLambdaPhi[1]->SetLineColor(ci[1]);
 
-  // //fHistLambdaPhi[0]->Draw("same");
-  // //fHistAntiLambdaPhi[0]->Draw("same");
-  // fHistLambdaPhi[1]->Draw("same");
-  // //fHistAntiLambdaPhi[1]->Draw("same");
+  fHistLambdaPhi[0]->SetMinimum(0.);
+  fHistLambdaPhi[0]->Draw("same");
+  //fHistAntiLambdaPhi[0]->Draw("same");
+  fHistLambdaPhi[1]->Draw("same");
+  //fHistAntiLambdaPhi[1]->Draw("same");
 
+  cLambdaQA->SaveAs("LambdaQA.png");
 
   //Delta
-  TCanvas* cDelta = new TCanvas("Delta","Delta",1200,300);
+  TCanvas* cDelta = new TCanvas("Delta","Delta",1000,500);
   cDelta->Divide(2);
   TH2D* dummyDelta = new TH2D("","",1,0.,80.,1,-0.5e-3,5.e-3);
   dummyDelta->GetXaxis()->SetTitle("centrality");
-  dummyDelta->GetYaxis()->SetTitle("#LTcos(#phi_{#Lambda}+phi_{2}-2#Psi)");
+  dummyDelta->GetYaxis()->SetTitle("#LTcos(#phi_{#Lambda} + #phi_{2}-2#Psi)");
   TProfile* pDelta_SS = (TProfile*) fProfileDelta_Lambda_hPos->Clone();
   pDelta_SS ->Add(fProfileDelta_AntiLambda_hNeg, 1);
   TH1D* hDelta_SS = pDelta_SS->ProjectionX();
@@ -303,13 +312,14 @@ void DrawResults() {
   hDeltaDelta->Draw("sameP");
   legendDeltaDelta->Draw("same");
 
+  cDelta->SaveAs("Delta.png");
 
   //Gamma
-  TCanvas* cGamma = new TCanvas("Gamma","Gamma",1200,300);
+  TCanvas* cGamma = new TCanvas("Gamma","Gamma",1000,500);
   cGamma->Divide(2);
   TH2D* dummyGamma = new TH2D("","",1,0.,80.,1,-0.6e-3,0.6e-3);
   dummyGamma->GetXaxis()->SetTitle("centrality");
-  dummyGamma->GetYaxis()->SetTitle("#LTcos(#phi_{#Lambda} + phi_{2} - 2#Psi)");
+  dummyGamma->GetYaxis()->SetTitle("#LTcos(#phi_{#Lambda} + #phi_{2} - 2#Psi)");
 
   TProfile* pGammaTPC_SS = (TProfile*) fProfileGammaTPC_Lambda_hPos->Clone();
   pGammaTPC_SS ->Add(fProfileGammaTPC_AntiLambda_hNeg, 1);
@@ -408,12 +418,12 @@ void DrawResults() {
 
 
   TLegend* legendGamma = new TLegend(0.2,0.65,0.4,0.85);
-  legendGamma->AddEntry(hGammaTPC_SS,"#Lambda-p^{+} + #bar{#Lambda}-h^{-} TPC","lp");
-  legendGamma->AddEntry(hGammaTPC_OS,"#Lambda-p^{-} + #bar{#Lambda}-h^{+} TPC","lp");
-  legendGamma->AddEntry(hGammaV0C_SS,"#Lambda-p^{+} + #bar{#Lambda}-h^{-} V0C","lp");
-  legendGamma->AddEntry(hGammaV0C_OS,"#Lambda-p^{-} + #bar{#Lambda}-h^{+} V0C","lp");
-  legendGamma->AddEntry(hGammaV0A_SS,"#Lambda-p^{+} + #bar{#Lambda}-h^{-} V0A","lp");
-  legendGamma->AddEntry(hGammaV0A_OS,"#Lambda-p^{-} + #bar{#Lambda}-h^{+} V0A","lp");
+  legendGamma->AddEntry(hGammaTPC_SS,"#Lambda-h^{+} + #bar{#Lambda}-h^{-} TPC","lp");
+  legendGamma->AddEntry(hGammaTPC_OS,"#Lambda-h^{-} + #bar{#Lambda}-h^{+} TPC","lp");
+  legendGamma->AddEntry(hGammaV0C_SS,"#Lambda-h^{+} + #bar{#Lambda}-h^{-} V0C","lp");
+  legendGamma->AddEntry(hGammaV0C_OS,"#Lambda-h^{-} + #bar{#Lambda}-h^{+} V0C","lp");
+  legendGamma->AddEntry(hGammaV0A_SS,"#Lambda-h^{+} + #bar{#Lambda}-h^{-} V0A","lp");
+  legendGamma->AddEntry(hGammaV0A_OS,"#Lambda-h^{-} + #bar{#Lambda}-h^{+} V0A","lp");
 
   TLegend* legendDeltaGamma = new TLegend(0.2,0.65,0.4,0.85);
   legendDeltaGamma->AddEntry(hDeltaGammaTPC,"OS-SS TPC","lp");
@@ -436,12 +446,14 @@ void DrawResults() {
   hDeltaGammaV0C->Draw("sameP");
   legendDeltaGamma->Draw("same");
 
+  cGamma->SaveAs("Gamma.png");
 
-  TCanvas* cDeltaLambdaP = new TCanvas("DeltaLambdaP","DeltaLambdaP",1200,300);
+
+  TCanvas* cDeltaLambdaP = new TCanvas("DeltaLambdaP","DeltaLambdaP",1000,500);
   cDeltaLambdaP->Divide(2);
   TH2D* dummyDeltaLambdaP = new TH2D("","",1,0.,80.,1,-5e-3,15.e-3);
   dummyDeltaLambdaP->GetXaxis()->SetTitle("centrality");
-  dummyDeltaLambdaP->GetYaxis()->SetTitle("#LTcos(#phi_{#Lambda} + phi_{p} - 2#Psi)");
+  dummyDeltaLambdaP->GetYaxis()->SetTitle("#LTcos(#phi_{#Lambda} + #phi_{p} - 2#Psi)");
 
   TProfile* pDeltaLambdaP_SS = (TProfile*) fProfileDelta_Lambda_Proton->Clone();
   pDeltaLambdaP_SS ->Add(fProfileDelta_AntiLambda_AntiProton, 1);
@@ -477,8 +489,8 @@ void DrawResults() {
   hDeltaDeltaLambdaP->SetLineWidth(2);
 
   TLegend* legendDeltaLambdaP = new TLegend(0.2,0.75,0.45,0.85);
-  legendDeltaLambdaP->AddEntry(hDeltaLambdaP_SS,"#Lambda-h^{+} + #bar{#Lambda}-p^{-}","lp");
-  legendDeltaLambdaP->AddEntry(hDeltaLambdaP_OS,"#Lambda-h^{-} + #bar{#Lambda}-p^{+}","lp");
+  legendDeltaLambdaP->AddEntry(hDeltaLambdaP_SS,"#Lambda-p^{+} + #bar{#Lambda}-p^{-}","lp");
+  legendDeltaLambdaP->AddEntry(hDeltaLambdaP_OS,"#Lambda-p^{-} + #bar{#Lambda}-p^{+}","lp");
 
   TLegend* legendDeltaDeltaLambdaP = new TLegend(0.2,0.75,0.45,0.85);
   legendDeltaDeltaLambdaP->AddEntry(hDeltaDeltaLambdaP,"OS-SS","lp");
@@ -493,13 +505,15 @@ void DrawResults() {
   hDeltaDeltaLambdaP->Draw("sameP");
   legendDeltaDelta->Draw("same");
 
+  cDeltaLambdaP->SaveAs("DeltaLambdaP.png");
+
   //Lambda-p
   //Gamma
-  TCanvas* cGammaLambdaP = new TCanvas("GammaLambdaP","GammaLambdaP",1200,300);
+  TCanvas* cGammaLambdaP = new TCanvas("GammaLambdaP","GammaLambdaP",1000,500);
   cGammaLambdaP->Divide(2);
   TH2D* dummyGammaLambdaP = new TH2D("","",1,0.,80.,1,-3e-3,3e-3);
   dummyGammaLambdaP->GetXaxis()->SetTitle("centrality");
-  dummyGammaLambdaP->GetYaxis()->SetTitle("#LTcos(#phi_{#Lambda} + phi_{p} - 2#Psi)");
+  dummyGammaLambdaP->GetYaxis()->SetTitle("#LTcos(#phi_{#Lambda} + #phi_{p} - 2#Psi)");
 
   TProfile* pGammaTPCLambdaP_SS = (TProfile*) fProfileGammaTPC_Lambda_Proton->Clone();
   pGammaTPCLambdaP_SS ->Add(fProfileGammaTPC_AntiLambda_AntiProton, 1);
@@ -626,4 +640,6 @@ void DrawResults() {
   hDeltaGammaV0ALambdaP->Draw("sameP");
   hDeltaGammaV0CLambdaP->Draw("sameP");
   legendDeltaGammaLambdaP->Draw("same");
+
+  cGammaLambdaP->SaveAs("GammaLambdaP.png");
 }
