@@ -175,22 +175,24 @@ void DrawResults() {
   cLambdaQA->Divide(3,2);
   cLambdaQA->cd(1);  
   TH2D* dummy1 = new TH2D("","",1,1.1,1.13,1,0,50.e6);
+  dummy1->GetXaxis()->SetTitle("M_{inv}");
   dummy1->Draw();
   fHistLambdaMass[0]->SetMarkerColor(ci[0]);
   fHistLambdaMass[0]->SetLineColor(ci[0]);
   fHistAntiLambdaMass[0]->SetMarkerColor(ci[1]);
   fHistAntiLambdaMass[0]->SetLineColor(ci[1]);
-  fHistLambdaMass[1]->SetMarkerColor(ci[2]);
-  fHistLambdaMass[1]->SetLineColor(ci[2]);
-  fHistAntiLambdaMass[1]->SetMarkerColor(ci[3]);
-  fHistAntiLambdaMass[1]->SetLineColor(ci[3]);
+  fHistLambdaMass[1]->SetMarkerColor(ci[3]);
+  fHistLambdaMass[1]->SetLineColor(ci[3]);
+  fHistAntiLambdaMass[1]->SetMarkerColor(ci[2]);
+  fHistAntiLambdaMass[1]->SetLineColor(ci[2]);
   fHistLambdaMass[1]->Draw("same");
   fHistAntiLambdaMass[1]->Draw("same");
   fHistLambdaMass[0]->Draw("same");
   fHistAntiLambdaMass[0]->Draw("same");
 
   cLambdaQA->cd(2);
-
+  fProfileLambdaMassVsPt[0]->GetXaxis()->SetTitle("p_{T}");
+  fProfileLambdaMassVsPt[0]->GetYaxis()->SetTitle("M_{inv}");
   fProfileLambdaMassVsPt[0]->SetMarkerColor(ci[0]);
   fProfileLambdaMassVsPt[0]->SetLineColor(ci[0]);
   fProfileAntiLambdaMassVsPt[0]->SetMarkerColor(ci[1]);
@@ -201,22 +203,25 @@ void DrawResults() {
   cLambdaQA->cd(3);
   TH2D* dummy2 = new TH2D("","",1,0,15.,1,1.11,1.12);
   dummy2->Draw();
-  fProfileLambdaMassVsPt[1]->SetMarkerColor(ci[0]);
-  fProfileLambdaMassVsPt[1]->SetLineColor(ci[0]);
-  fProfileAntiLambdaMassVsPt[1]->SetMarkerColor(ci[1]);
-  fProfileAntiLambdaMassVsPt[1]->SetLineColor(ci[1]);
+  dummy2->GetXaxis()->SetTitle("p_{T}");
+  dummy2->GetYaxis()->SetTitle("M_{inv}");
+  fProfileLambdaMassVsPt[1]->SetMarkerColor(ci[3]);
+  fProfileLambdaMassVsPt[1]->SetLineColor(ci[3]);
+  fProfileAntiLambdaMassVsPt[1]->SetMarkerColor(ci[2]);
+  fProfileAntiLambdaMassVsPt[1]->SetLineColor(ci[2]);
   fProfileLambdaMassVsPt[1]->Draw("same");
   fProfileAntiLambdaMassVsPt[1]->Draw("same");
 
   cLambdaQA->cd(4);
+  fHistLambdaPt[0]->GetXaxis()->SetTitle("p_{T}");
   fHistLambdaPt[0]->SetMarkerColor(ci[0]);
   fHistLambdaPt[0]->SetLineColor(ci[0]);
   fHistAntiLambdaPt[0]->SetMarkerColor(ci[1]);
   fHistAntiLambdaPt[0]->SetLineColor(ci[1]);
-  fHistLambdaPt[1]->SetMarkerColor(ci[0]);
-  fHistLambdaPt[1]->SetLineColor(ci[0]);
-  fHistAntiLambdaPt[1]->SetMarkerColor(ci[1]);
-  fHistAntiLambdaPt[1]->SetLineColor(ci[1]);
+  fHistLambdaPt[1]->SetMarkerColor(ci[3]);
+  fHistLambdaPt[1]->SetLineColor(ci[3]);
+  fHistAntiLambdaPt[1]->SetMarkerColor(ci[2]);
+  fHistAntiLambdaPt[1]->SetLineColor(ci[2]);
 
   fHistLambdaPt[0]->Draw("same");
   fHistAntiLambdaPt[0]->Draw("same");
@@ -224,14 +229,14 @@ void DrawResults() {
   fHistAntiLambdaPt[1]->Draw("same");
 
   cLambdaQA->cd(5);
-  fHistLambdaEta[0]->SetMarkerColor(ci[0]);
+  fHistLambdaEta[0]->GetXaxis()->SetTitle("#eta");
   fHistLambdaEta[0]->SetLineColor(ci[0]);
   fHistAntiLambdaEta[0]->SetMarkerColor(ci[1]);
   fHistAntiLambdaEta[0]->SetLineColor(ci[1]);
-  fHistLambdaEta[1]->SetMarkerColor(ci[0]);
-  fHistLambdaEta[1]->SetLineColor(ci[0]);
-  fHistAntiLambdaEta[1]->SetMarkerColor(ci[1]);
-  fHistAntiLambdaEta[1]->SetLineColor(ci[1]);
+  fHistLambdaEta[1]->SetMarkerColor(ci[3]);
+  fHistLambdaEta[1]->SetLineColor(ci[3]);
+  fHistAntiLambdaEta[1]->SetMarkerColor(ci[2]);
+  fHistAntiLambdaEta[1]->SetLineColor(ci[2]);
 
   fHistLambdaEta[0]->Draw("same");
   fHistAntiLambdaEta[0]->Draw("same");
@@ -239,12 +244,13 @@ void DrawResults() {
   fHistAntiLambdaEta[1]->Draw("same");
 
   cLambdaQA->cd(6);
+  fHistLambdaPhi[0]->GetXaxis()->SetTitle("#phi");
   fHistLambdaPhi[0]->SetMarkerColor(ci[0]);
   fHistLambdaPhi[0]->SetLineColor(ci[0]);
   //fHistAntiLambdaPhi[0]->SetMarkerColor(ci[1]);
   //fHistAntiLambdaPhi[0]->SetLineColor(ci[1]);
-  fHistLambdaPhi[1]->SetMarkerColor(ci[0]);
-  fHistLambdaPhi[1]->SetLineColor(ci[0]);
+  fHistLambdaPhi[1]->SetMarkerColor(ci[3]);
+  fHistLambdaPhi[1]->SetLineColor(ci[3]);
   //fHistAntiLambdaPhi[1]->SetMarkerColor(ci[1]);
   //fHistAntiLambdaPhi[1]->SetLineColor(ci[1]);
 
@@ -427,8 +433,8 @@ void DrawResults() {
 
   TLegend* legendDeltaGamma = new TLegend(0.2,0.65,0.4,0.85);
   legendDeltaGamma->AddEntry(hDeltaGammaTPC,"OS-SS TPC","lp");
-  legendDeltaGamma->AddEntry(hDeltaGammaV0A,"OS-SS TPC","lp");
   legendDeltaGamma->AddEntry(hDeltaGammaV0C,"OS-SS V0C","lp");
+  legendDeltaGamma->AddEntry(hDeltaGammaV0A,"OS-SS V0A","lp");
   
   cGamma->cd(1);
   dummyGamma->Draw("same");
@@ -500,7 +506,7 @@ void DrawResults() {
   dummyDeltaLambdaP->Draw("same");
   hDeltaLambdaP_OS->Draw("sameP");
   hDeltaLambdaP_SS->Draw("sameP");
-  legendDelta->Draw("same");
+  legendDeltaLambdaP->Draw("same");
   cDeltaLambdaP->cd(2);
   hDeltaDeltaLambdaP->Draw("sameP");
   legendDeltaDelta->Draw("same");
@@ -621,8 +627,8 @@ void DrawResults() {
 
   TLegend* legendDeltaGammaLambdaP = new TLegend(0.2,0.65,0.4,0.85);
   legendDeltaGammaLambdaP->AddEntry(hDeltaGammaTPCLambdaP,"OS-SS TPC","lp");
-  legendDeltaGammaLambdaP->AddEntry(hDeltaGammaV0ALambdaP,"OS-SS TPC","lp");
   legendDeltaGammaLambdaP->AddEntry(hDeltaGammaV0CLambdaP,"OS-SS V0C","lp");
+  legendDeltaGammaLambdaP->AddEntry(hDeltaGammaV0ALambdaP,"OS-SS V0A","lp");
   
 
   cGammaLambdaP->cd(1);

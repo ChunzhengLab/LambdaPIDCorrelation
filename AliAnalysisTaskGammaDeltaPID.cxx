@@ -1502,6 +1502,8 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
     //// Now fill Lambda-X correlations:
     for (vector<Double_t>::size_type iTrk = 0; iTrk < vecPhi.size(); iTrk++) {
       Int_t    id   = vecID[iTrk];
+      //debug
+      //cout<<"track's id for pairing:  "<<id<<endl;
       Int_t    code = vecPDGCode[iTrk];
       Double_t pt   = vecPt[iTrk];
       Double_t eta  = vecEta[iTrk];
@@ -1534,6 +1536,8 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
             qx +=  vecNUAWeight[iPosDaughter] * TMath::Cos(2 * vecPhi[iPosDaughter]);
             qy +=  vecNUAWeight[iPosDaughter] * TMath::Sin(2 * vecPhi[iPosDaughter]);
             fTPCMult -= 1;
+            //debug
+            cout<<"find a pos overlap track in TPCNeg"<<end;
           }
 
           if (iterNegDaughter != vecNegEPTrkID.end()) {
@@ -1541,6 +1545,8 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
             qx += vecNUAWeight[iNegDaughter] * TMath::Cos(2 * vecPhi[iNegDaughter]);
             qy += vecNUAWeight[iNegDaughter] * TMath::Sin(2 * vecPhi[iNegDaughter]);
             fTPCMult -= 1;
+            //debug
+            cout<<"find a neg overlap track in TPCPos"<<end;
           }
 	      } else { ///for -ve EP
 	        fTPCQxTemp = fSumQnxPos[0];
@@ -1555,6 +1561,8 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
             qx += vecNUAWeight[iPosDaughter] * TMath::Cos(2 * vecPhi[iPosDaughter]);
             qy += vecNUAWeight[iPosDaughter] * TMath::Sin(2 * vecPhi[iPosDaughter]);
             fTPCMult -= 1;
+            //debug
+            cout<<"find a pos overlap track in TPCNeg"<<end;
           }
     
           if (iterNegDaughter != vecPosEPTrkID.end()) {
@@ -1562,11 +1570,13 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
             qx +=  vecNUAWeight[iNegDaughter] * TMath::Cos(2 * vecPhi[iNegDaughter]);
             qy +=  vecNUAWeight[iNegDaughter] * TMath::Sin(2 * vecPhi[iNegDaughter]);
             fTPCMult -= 1;
+            //debug
+            cout<<"find a neg overlap track in TPCNeg"<<end;
           }
 	      }/// for PosEP 
 
 	      fTPCQxTemp -= qx;   /// qx=0,qy=0 if Lambda daughters are on the opposite eta of the EP used.. 
-	      fTPCQyTemp -= qy;   	      
+	      fTPCQyTemp -= qy;
     
 	      if(fTPCMult>0) {
 	        fTPCQxTemp = fTPCQxTemp/fTPCMult;
@@ -1574,7 +1584,9 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
 	      }
 	      
 	      Double_t fPsiNTPCNoAuto = (1./2)*TMath::ATan2(fTPCQyTemp,fTPCQxTemp);   //AutoCorrelation Removed EP.
-	      if(fPsiNTPCNoAuto < 0) fPsiNTPCNoAuto += TMath::TwoPi()/2.0;  	  
+	      if(fPsiNTPCNoAuto < 0) fPsiNTPCNoAuto += TMath::TwoPi()/2.0;
+        //debug
+        //cout<<"AutoCorrelation Removed EP    "<<fPsiNTPCNeg<<endl;  	  
     
 	      Double_t delta = TMath::Cos(phi_lambda - phi);
 	      Double_t gammaTPC  = TMath::Cos(phi_lambda + phi - 2 *fPsiNTPCNoAuto);
