@@ -1537,7 +1537,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
             qy +=  vecNUAWeight[iPosDaughter] * TMath::Sin(2 * vecPhi[iPosDaughter]);
             fTPCMult -= 1;
             //debug
-            cout<<"find a pos overlap track in TPCNeg"<<end;
+            cout<<"find a pos overlap track in TPCNeg"<<endl;
           }
 
           if (iterNegDaughter != vecNegEPTrkID.end()) {
@@ -1546,7 +1546,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
             qy += vecNUAWeight[iNegDaughter] * TMath::Sin(2 * vecPhi[iNegDaughter]);
             fTPCMult -= 1;
             //debug
-            cout<<"find a neg overlap track in TPCPos"<<end;
+            cout<<"find a neg overlap track in TPCPos"<<endl;
           }
 	      } else { ///for -ve EP
 	        fTPCQxTemp = fSumQnxPos[0];
@@ -1562,7 +1562,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
             qy += vecNUAWeight[iPosDaughter] * TMath::Sin(2 * vecPhi[iPosDaughter]);
             fTPCMult -= 1;
             //debug
-            cout<<"find a pos overlap track in TPCNeg"<<end;
+            cout<<"find a pos overlap track in TPCNeg"<<endl;
           }
     
           if (iterNegDaughter != vecPosEPTrkID.end()) {
@@ -1571,7 +1571,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
             qy +=  vecNUAWeight[iNegDaughter] * TMath::Sin(2 * vecPhi[iNegDaughter]);
             fTPCMult -= 1;
             //debug
-            cout<<"find a neg overlap track in TPCNeg"<<end;
+            cout<<"find a neg overlap track in TPCNeg"<<endl;
           }
 	      }/// for PosEP 
 
