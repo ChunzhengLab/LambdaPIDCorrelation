@@ -92,6 +92,15 @@ void runAnalysis()
     alienHandler->SetRunPrefix("000");
     // runnumber
     alienHandler->AddRunNumber(296424);
+    alienHandler->AddRunNumber(296615);
+    alienHandler->AddRunNumber(296616);
+    alienHandler->AddRunNumber(296618);
+    alienHandler->AddRunNumber(296619);
+    alienHandler->AddRunNumber(296621);
+    alienHandler->AddRunNumber(296622);
+    alienHandler->AddRunNumber(296623);
+    alienHandler->AddRunNumber(295589);
+    alienHandler->AddRunNumber(295610);
     // number of files per subjob
     alienHandler->SetSplitMaxInputFileNumber(40);
     alienHandler->SetExecutable("myTask.sh");
