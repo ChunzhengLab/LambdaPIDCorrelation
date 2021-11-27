@@ -1744,7 +1744,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
         Double_t dPhiTPCPos = phi - fPsiNTPCPos;
         Double_t dPhiTPCNeg = phi - fPsiNTPCNeg;
         Double_t dPhiV0C    = phi - fPsiNV0C;
-        Double_t dPhiV0A    = phi - fPsiNV0C;
+        Double_t dPhiV0A    = phi - fPsiNV0A;
 
         if(dPhiTPCPos < 0) dPhiTPCPos += TMath::Pi();
         if(dPhiTPCNeg < 0) dPhiTPCNeg += TMath::Pi();
