@@ -450,7 +450,6 @@ class AliAnalysisTaskGammaDeltaPID : public AliAnalysisTaskSE {
   Int_t    GetLambdaCode(const AliAODTrack *pTrack, const AliAODTrack *ntrack); 
 
 
-
   
   AliAnalysisTaskGammaDeltaPID(const AliAnalysisTaskGammaDeltaPID &other);
   AliAnalysisTaskGammaDeltaPID &operator=(const AliAnalysisTaskGammaDeltaPID &other);    

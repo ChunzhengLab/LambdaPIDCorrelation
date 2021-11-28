@@ -327,7 +327,6 @@ AliAnalysisTaskGammaDeltaPID::AliAnalysisTaskGammaDeltaPID(const char *name):
     fHist3DdNdPhiCentPthNeg[i] = NULL;  
     fHist3DdNdPhiCentPtProton[i] = NULL;
     fHist3DdNdPhiCentPtAntiProton[i] = NULL;
-
   }
   for (int i = 0; i < 4; i++) {
     fHist3DdNdPhiCentPtLambda[i] = NULL;
@@ -350,13 +349,13 @@ AliAnalysisTaskGammaDeltaPID::AliAnalysisTaskGammaDeltaPID():
   fListHist(NULL),
   fListTRKCorr(NULL),
   fListNUACorr(NULL),
-  fListV0MCorr(NULL),   
+  fListV0MCorr(NULL),
   fV0CutPU(NULL),
   fSPDCutPU(NULL),
   fMultCutPU(NULL),
   fCenCutLowPU(NULL),
   fCenCutHighPU(NULL),
-						  
+		
   gHarmonic(0),
   gParticleID(0),
   fFilterBit(1),
@@ -1073,6 +1072,14 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
   
 
 
+
+
+
+
+
+
+
+
   /// We Are About to Start Main Analysis Below: //
   
  
@@ -1580,8 +1587,6 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
         qxNegTPC +=  vecNegEPTrkNUAWgt[iDaughter] * TMath::Cos(2 * vecNegEPTrkPhi[iDaughter]);
         qyNegTPC +=  vecNegEPTrkNUAWgt[iDaughter] * TMath::Sin(2 * vecNegEPTrkPhi[iDaughter]);
         fNegTPCMult -= vecNegEPTrkNUAWgt[iDaughter];
-        //debug
-        //cout<<"find a overlap track in TPCNeg   "<<id_posDaughter<<"    "<<vecNegEPTrkNUAWgt[iDaughter]<<"   "<<vecNegEPTrkPhi[iDaughter]<<endl;
       }
 
       if (iterNegDaughterNegTPC != vecNegEPTrkID.end()) {
@@ -1589,8 +1594,6 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
         qxNegTPC += vecNegEPTrkNUAWgt[iDaughter] * TMath::Cos(2 * vecNegEPTrkPhi[iDaughter]);
         qyNegTPC += vecNegEPTrkNUAWgt[iDaughter] * TMath::Sin(2 * vecNegEPTrkPhi[iDaughter]);
         fNegTPCMult -= vecNegEPTrkNUAWgt[iDaughter];
-        //debug
-        //cout<<"find a overlap track in TPCNeg   "<<id_negDaughter<<"    "<<vecNegEPTrkNUAWgt[iDaughter]<<"   "<<vecNegEPTrkPhi[iDaughter]<<endl;
       }
 
       if (iterPosDaughterPosTPC != vecPosEPTrkID.end()) {
@@ -1598,8 +1601,6 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
         qxPosTPC += vecPosEPTrkNUAWgt[iDaughter] * TMath::Cos(2 * vecPosEPTrkPhi[iDaughter]);
         qyPosTPC += vecPosEPTrkNUAWgt[iDaughter] * TMath::Sin(2 * vecPosEPTrkPhi[iDaughter]);
         fPosTPCMult -= vecPosEPTrkNUAWgt[iDaughter];
-        //debug
-        //cout<<"find a overlap track in TPCPos   "<<id_posDaughter<<"    "<<vecPosEPTrkNUAWgt[iDaughter]<<"   "<<vecPosEPTrkPhi[iDaughter]<<endl;
       }
     
       if (iterNegDaughterPosTPC != vecPosEPTrkID.end()) {
@@ -1607,8 +1608,6 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
         qxPosTPC +=  vecPosEPTrkNUAWgt[iDaughter] * TMath::Cos(2 * vecPosEPTrkPhi[iDaughter]);
         qyPosTPC +=  vecPosEPTrkNUAWgt[iDaughter] * TMath::Sin(2 * vecPosEPTrkPhi[iDaughter]);
         fPosTPCMult -= vecPosEPTrkNUAWgt[iDaughter];
-        //debug
-        //cout<<"find a overlap track in TPCPos   "<<id_negDaughter<<"    "<<vecPosEPTrkNUAWgt[iDaughter]<<"   "<<vecPosEPTrkPhi[iDaughter]<<endl;
       }
 
       fPosTPCQxTemp -= qxPosTPC;   /// qx=0,qy=0 if Lambda daughters are on the opposite eta of the EP used.. 
@@ -1629,8 +1628,6 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
       Double_t fPsiNNegTPCNoAuto = (1./2)*TMath::ATan2(fNegTPCQyTemp,fNegTPCQxTemp);   //AutoCorrelation Removed Neg EP.
       if(fPsiNNegTPCNoAuto < 0) fPsiNNegTPCNoAuto += TMath::TwoPi()/2.0;
 
-      // std::cout<<"fPsiNPosTPCNoAuto"<<fPsiNPosTPCNoAuto<<endl;
-      // std::cout<<"fPsiNNegTPCNoAuto"<<fPsiNNegTPCNoAuto<<endl;
 
       //Check the PID Flow
       if(bCheckPIDFlow) {
@@ -1734,7 +1731,6 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
     }/// loop over charge particle array
 
     if(bCheckPIDFlow) {
-      //TODO
       for (vector<Double_t>::size_type iTrk = 0; iTrk < vecPhi.size(); iTrk++) {
         Int_t    code = vecPDGCode[iTrk];
         Double_t pt   = vecPt[iTrk];
@@ -2428,7 +2424,6 @@ void AliAnalysisTaskGammaDeltaPID::SetupEventAndTaskConfigInfo(){
 }
 
 void AliAnalysisTaskGammaDeltaPID::SetupLambdaPIDFlowHistograms() {
-//TODO
   Double_t centbins[10] = {0., 10., 20., 30., 40., 50., 60., 70, 80, 90};
   Double_t pTbins[13]   = {0.0, 0.2, 0.6, 1.0, 1.4, 1.8, 2.2, 2.6, 3.0, 3.4, 3.8, 4.2, 5.0};
   Double_t phibins[361] = {0.};
