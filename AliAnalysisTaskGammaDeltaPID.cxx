@@ -355,7 +355,7 @@ AliAnalysisTaskGammaDeltaPID::AliAnalysisTaskGammaDeltaPID():
   fMultCutPU(NULL),
   fCenCutLowPU(NULL),
   fCenCutHighPU(NULL),
-		
+
   gHarmonic(0),
   gParticleID(0),
   fFilterBit(1),
@@ -1078,7 +1078,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
 
 
 
-
+  
 
   /// We Are About to Start Main Analysis Below: //
   
@@ -1533,7 +1533,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
           if (find(vecDaughterNegID.begin(), vecDaughterNegID.end(), id_negDaughter) != vecDaughterNegID.end()) continue;
           fHistAntiLambdaPt[1]              -> Fill(pt);
           fHistAntiLambdaEta[1]             -> Fill(eta);
-          fHistAntiLambdaPhi[1]             -> Fill(eta);
+          fHistAntiLambdaPhi[1]             -> Fill(phi);
           fHistAntiLambdaDcaToPrimVertex[1] -> Fill(dcaToPV);
           fHistAntiLambdaCPA[1]             -> Fill(CPA);
           fHistAntiLambdaDecayLength[1]     -> Fill(dl);
@@ -1696,7 +1696,7 @@ void AliAnalysisTaskGammaDeltaPID::UserExec(Option_t*) {
           fProfileGammaTPC_AntiLambda_hPos -> Fill(centrality, gammaTPC);
           fProfileGammaV0C_AntiLambda_hPos -> Fill(centrality, gammaV0C);
           fProfileGammaV0A_AntiLambda_hPos -> Fill(centrality, gammaV0A);
-        }    
+        }
         if (code < 0 && code_lambda == -3122) {
           fProfileDelta_AntiLambda_hNeg    -> Fill(centrality, delta);
           fProfileGammaTPC_AntiLambda_hNeg -> Fill(centrality, gammaTPC);
@@ -2087,7 +2087,7 @@ void AliAnalysisTaskGammaDeltaPID::SetupQAHistograms(){
     fListHist->Add(fHistLambdaCPA[i]);
     fHistLambdaDecayLength[i] = new TH1D(Form("hLambdaDecayLength_%sMassCut",name),"", 250, 0., 500.);
     fListHist->Add(fHistLambdaDecayLength[i]);
-    fHistLambdaMass[i] = new TH1D(Form("hLambdaMass_%sMassCut",name),"",250,1.,1.25); //  Current bin size = 0.001
+    fHistLambdaMass[i] = new TH1D(Form("hLambdaMass_%sMassCut",name),"",1000,1.,1.25); //  Current bin size = 0.00025
     fListHist->Add(fHistLambdaMass[i]);
     fProfileLambdaMassVsPt[i] = new TProfile(Form("pLambdaMassVsPt_%sMassCut",name),"",200,0,20);
     fListHist->Add(fProfileLambdaMassVsPt[i]);
@@ -2105,7 +2105,7 @@ void AliAnalysisTaskGammaDeltaPID::SetupQAHistograms(){
     fListHist->Add(fHistAntiLambdaCPA[i]);
     fHistAntiLambdaDecayLength[i] = new TH1D(Form("hAntiLambdaDecayLength_%sMassCut",name),"", 250, 0., 500.);
     fListHist->Add(fHistAntiLambdaDecayLength[i]);
-    fHistAntiLambdaMass[i] = new TH1D(Form("hAntiLambdaMass_%sMassCut",name),"",250,1.,1.25); // Current bin size = 0.001
+    fHistAntiLambdaMass[i] = new TH1D(Form("hAntiLambdaMass_%sMassCut",name),"",1000,1.,1.25); // Current bin size = 0.00025
     fListHist->Add(fHistAntiLambdaMass[i]);
     fProfileAntiLambdaMassVsPt[i] = new TProfile(Form("pAntiLambdaMassVsPt_%sMassCut",name),"",200,0,20);
     fListHist->Add(fProfileAntiLambdaMassVsPt[i]);    
@@ -2586,7 +2586,7 @@ Bool_t AliAnalysisTaskGammaDeltaPID::CheckPIDofParticle(AliAODTrack* ftrack,Int_
 
   ///Pion => 
   if(pidToCheck==1){ 
-    nSigTPC = fPIDResponse->NumberOfSigmasTPC(ftrack, AliPID::kPion);//@chunzheng: Some warning show here (***TDatabasePDG::AddParicle: particle with PDGcode = 3124 already defind),I don't understand what happended.
+    nSigTPC = fPIDResponse->NumberOfSigmasTPC(ftrack, AliPID::kPion);//Some warning show here (***TDatabasePDG::AddParicle: particle with PDGcode = 3124 already defind),I don't understand what happended. --chunzheng
     nSigTOF = fPIDResponse->NumberOfSigmasTOF(ftrack, AliPID::kPion);
     nSigRMS = TMath::Sqrt(nSigTPC*nSigTPC + nSigTOF*nSigTOF);
 
@@ -3231,7 +3231,6 @@ void AliAnalysisTaskGammaDeltaPID::Terminate(Option_t *)  {
   //fOutputList = dynamic_cast<TList*> (GetOutputData(1));
   //if (!fOutputList) return;
 }
-
 
 
 
