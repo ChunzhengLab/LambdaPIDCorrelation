@@ -1,3 +1,4 @@
 .vscode
 AliAOD.root
 .DS_Store
+*.pdf

@@ -60,19 +60,19 @@ void DrawGammaLambdaHadron()
   TProfile* pV0CTPCPsiNCorrelation = (TProfile*)inputList->FindObject("hV0CTPCPsiNCorrelation");
   TProfile* pV0ATPCPsiNCorrelation = (TProfile*)inputList->FindObject("hV0ATPCPsiNCorrelation");
   TProfile* pTPCPsiNCorrelation    = (TProfile*)inputList->FindObject("hTPCPsiNCorrelation");
-  pV0CV0APsiNCorrelation -> Rebin(5);
-  pV0CTPCPsiNCorrelation -> Rebin(5);
-  pV0ATPCPsiNCorrelation -> Rebin(5);
-  pTPCPsiNCorrelation    -> Rebin(5);
+  pV0CV0APsiNCorrelation -> Rebin(10);
+  pV0CTPCPsiNCorrelation -> Rebin(10);
+  pV0ATPCPsiNCorrelation -> Rebin(10);
+  pTPCPsiNCorrelation    -> Rebin(10);
   TH1D* hV0CV0APsiNCorrelation = pV0CV0APsiNCorrelation->ProjectionX();
   TH1D* hV0CTPCPsiNCorrelation = pV0CTPCPsiNCorrelation->ProjectionX();
   TH1D* hV0ATPCPsiNCorrelation = pV0ATPCPsiNCorrelation->ProjectionX();
   TH1D* hTPCPsiNCorrelation    = pTPCPsiNCorrelation   ->ProjectionX();
-  TH1D* hV0CRes_TPC_V0C_V0A = new TH1D("hV0CRes_TPC_V0C_V0A", "Res", 18, 0., 90.);
-  TH1D* hV0ARes_TPC_V0A_V0C = new TH1D("hV0ARes_TPC_V0A_V0C", "Res", 18, 0., 90.);
-  TH1D* hTPCRes_V0C_TPC_V0A = new TH1D("hTPCRes_V0C_TPC_V0A", "Res", 18, 0., 90.);
+  TH1D* hV0CRes_TPC_V0C_V0A = new TH1D("hV0CRes_TPC_V0C_V0A", "Res", 9, 0., 90.);
+  TH1D* hV0ARes_TPC_V0A_V0C = new TH1D("hV0ARes_TPC_V0A_V0C", "Res", 9, 0., 90.);
+  TH1D* hTPCRes_V0C_TPC_V0A = new TH1D("hTPCRes_V0C_TPC_V0A", "Res", 9, 0., 90.);
 
-  for (int iCent = 1; iCent <= 18; iCent++) {
+  for (int iCent = 1; iCent <= 9; iCent++) {
     Double_t A    = hV0CTPCPsiNCorrelation -> GetBinContent(iCent);
     Double_t B    = hV0CV0APsiNCorrelation -> GetBinContent(iCent);
     Double_t C    = hV0ATPCPsiNCorrelation -> GetBinContent(iCent);
@@ -85,7 +85,7 @@ void DrawGammaLambdaHadron()
     hV0CRes_TPC_V0C_V0A -> SetBinContent(iCent,resV0C);
     hV0CRes_TPC_V0C_V0A -> SetBinError(iCent,resV0CErr);
   }
-  for (int iCent = 1; iCent <= 18; iCent++) {
+  for (int iCent = 1; iCent <= 9; iCent++) {
     Double_t A =    hV0ATPCPsiNCorrelation -> GetBinContent(iCent);
     Double_t B =    hV0CV0APsiNCorrelation -> GetBinContent(iCent);
     Double_t C =    hV0CTPCPsiNCorrelation -> GetBinContent(iCent);
@@ -98,7 +98,7 @@ void DrawGammaLambdaHadron()
     hV0ARes_TPC_V0A_V0C -> SetBinContent(iCent,resV0A);
     hV0ARes_TPC_V0A_V0C -> SetBinError(iCent,resV0AErr);
   }
-  for (int iCent = 1; iCent <= 18; iCent++) {
+  for (int iCent = 1; iCent <= 9; iCent++) {
     Double_t A    = hV0CTPCPsiNCorrelation -> GetBinContent(iCent);
     Double_t B    = hV0ATPCPsiNCorrelation -> GetBinContent(iCent);
     Double_t C    = hV0CV0APsiNCorrelation -> GetBinContent(iCent);
@@ -137,6 +137,20 @@ void DrawGammaLambdaHadron()
   fProfileGamma_Lambda_hNeg[2]              = (TProfile*)inputList->FindObject("fProfileGammaV0A_Lambda_hNeg");
   fProfileGamma_AntiLambda_hPos[2]          = (TProfile*)inputList->FindObject("fProfileGammaV0A_AntiLambda_hPos");
   fProfileGamma_AntiLambda_hNeg[2]          = (TProfile*)inputList->FindObject("fProfileGammaV0A_AntiLambda_hNeg");
+
+  fProfileGamma_Lambda_hPos[0]              ->Rebin(2);
+  fProfileGamma_Lambda_hNeg[0]              ->Rebin(2);
+  fProfileGamma_AntiLambda_hPos[0]          ->Rebin(2);
+  fProfileGamma_AntiLambda_hNeg[0]          ->Rebin(2);
+  fProfileGamma_Lambda_hPos[1]              ->Rebin(2);
+  fProfileGamma_Lambda_hNeg[1]              ->Rebin(2);
+  fProfileGamma_AntiLambda_hPos[1]          ->Rebin(2);
+  fProfileGamma_AntiLambda_hNeg[1]          ->Rebin(2);
+  fProfileGamma_Lambda_hPos[2]              ->Rebin(2);
+  fProfileGamma_Lambda_hNeg[2]              ->Rebin(2);
+  fProfileGamma_AntiLambda_hPos[2]          ->Rebin(2);
+  fProfileGamma_AntiLambda_hNeg[2]          ->Rebin(2);
+
 
   TH1D*  hGamma_Lambda_hPos[3];    
   TH1D*  hGamma_Lambda_hNeg[3];    
@@ -306,6 +320,7 @@ void DrawGammaLambdaHadron()
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Draw gammaV0C and DeltaV0C
   TH2D* dummyGamma = new TH2D("","",1,0.,80.,1,-1.2e-3,1.2e-3);
+  dummyGamma->GetYaxis()->SetTitleOffset(1.3);
   dummyGamma->GetXaxis()->SetTitle("centrality");
   if(!bDivideRes)  dummyGamma->GetYaxis()->SetTitle("#LTcos(#phi_{#Lambda} + #phi_{2} -2#Psi)");
   if(bDivideRes) dummyGamma->GetYaxis()->SetTitle("#LTcos(#phi_{#Lambda} + #phi_{2} - 2#Psi)/Res");
@@ -323,7 +338,7 @@ void DrawGammaLambdaHadron()
   dummyDeltaGamma->GetYaxis()->SetTitle("#Delta#gamma");
   TLegend* legendDeltaGamma = new TLegend(0.15,0.65,0.45,0.8);
   legendDeltaGamma->AddEntry(hDeltaGamma_LambdaHadron[1],"#Lambda","lp");
-  legendDeltaGamma->AddEntry(hDeltaGamma[1],"OS-SS","lp");
+  legendDeltaGamma->AddEntry(hDeltaGamma[0],"OS-SS","lp");
   legendDeltaGamma->AddEntry(hDeltaGamma_AntiLambdaHadron[1],"#bar{#Lambda}","lp");
 
   TCanvas* cGamma = new TCanvas("Gamma","Gamma",1200,400);
@@ -341,10 +356,12 @@ void DrawGammaLambdaHadron()
 
   cGamma->cd(2);
   dummyDeltaGamma->Draw("same");
-  hDeltaGamma_LambdaHadron[1]->Draw("same");
-  hDeltaGamma_AntiLambdaHadron[1]->Draw("same");
-  hDeltaGamma[1]->Draw("same");
+  hDeltaGamma_LambdaHadron[0]->Draw("same");
+  hDeltaGamma_AntiLambdaHadron[0]->Draw("same");
+  hDeltaGamma[0]->Draw("same");
   legendDeltaGamma->Draw("same");
+  cGamma->SaveAs("GammaLH1.pdf");
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -366,7 +383,7 @@ void DrawGammaLambdaHadron()
   cGammaPlane->Divide(2);
 
   cGammaPlane->cd(1);
-  //dummyGamma->Draw("same");
+  dummyGamma->Draw("same");
   hGamma_SS[0]->Draw("same");
   hGamma_OS[0]->Draw("same");
   hGamma_SS[1]->Draw("same");
@@ -376,11 +393,20 @@ void DrawGammaLambdaHadron()
   legendGammaPlane->Draw("same");
 
   cGammaPlane->cd(2);
-  //dummyDeltaGamma->Draw("same");
+  dummyDeltaGamma->Draw("same");
   hDeltaGamma[0]->Draw("same");
   hDeltaGamma[1]->Draw("same");
   hDeltaGamma[2]->Draw("same");
   legendDeltaGammaPlane->Draw("same");
 
-}
+  cGammaPlane->SaveAs("GammaLH2.pdf");
 
+  TH1D* hDivide[3];
+  for (size_t i = 0; i < 3; i++)
+  {
+    hDivide[i] = (TH1D*)hGamma_SS[i]->Clone();
+    hDivide[i] -> Divide(hGamma_OS[i]);
+  }
+
+
+}

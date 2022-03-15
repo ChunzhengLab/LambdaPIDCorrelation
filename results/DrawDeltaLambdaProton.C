@@ -43,6 +43,11 @@ void DrawDeltaLambdaProton()
   TProfile*  fProfileDelta_Lambda_hNeg              = (TProfile*)inputList->FindObject("fProfileDelta_Lambda_AntiProton");
   TProfile*  fProfileDelta_AntiLambda_hPos          = (TProfile*)inputList->FindObject("fProfileDelta_AntiLambda_Proton");
   TProfile*  fProfileDelta_AntiLambda_hNeg          = (TProfile*)inputList->FindObject("fProfileDelta_AntiLambda_AntiProton");
+
+  fProfileDelta_Lambda_hPos     ->Rebin();
+  fProfileDelta_Lambda_hNeg     ->Rebin();
+  fProfileDelta_AntiLambda_hPos ->Rebin();
+  fProfileDelta_AntiLambda_hNeg ->Rebin();
   TH1D*  hDelta_Lambda_hPos     = fProfileDelta_Lambda_hPos     ->ProjectionX();
   TH1D*  hDelta_Lambda_hNeg     = fProfileDelta_Lambda_hNeg     ->ProjectionX();
   TH1D*  hDelta_AntiLambda_hPos = fProfileDelta_AntiLambda_hPos ->ProjectionX();
@@ -121,7 +126,7 @@ void DrawDeltaLambdaProton()
   cDelta->Divide(2);
 
   cDelta->cd(1);
-  dummyDelta->SetLabelOffset(0.01);
+  dummyDelta->GetYaxis()->SetTitleOffset(1.3);
   dummyDelta->Draw("same");
   hDelta_Lambda_hPos->Draw("same");
   hDelta_Lambda_hNeg->Draw("same");
